@@ -1,85 +1,95 @@
 // All components mapping with path for internal routes
 
-import { lazy } from 'react'
+import { lazy } from "react";
 
-const Dashboard = lazy(() => import('../pages/protected/Dashboard'))
-const Welcome = lazy(() => import('../pages/protected/Welcome'))
-const Page404 = lazy(() => import('../pages/protected/404'))
-const Blank = lazy(() => import('../pages/protected/Blank'))
-const Charts = lazy(() => import('../pages/protected/Charts'))
-const Leads = lazy(() => import('../pages/protected/Leads'))
-const Integration = lazy(() => import('../pages/protected/Integration'))
-const Calendar = lazy(() => import('../pages/protected/Calendar'))
-const Team = lazy(() => import('../pages/protected/Team'))
-const Transactions = lazy(() => import('../pages/protected/Transactions'))
-const Bills = lazy(() => import('../pages/protected/Bills'))
-const ProfileSettings = lazy(() => import('../pages/protected/ProfileSettings'))
-const GettingStarted = lazy(() => import('../pages/GettingStarted'))
-const DocFeatures = lazy(() => import('../pages/DocFeatures'))
-const DocComponents = lazy(() => import('../pages/DocComponents'))
-
+const Dashboard = lazy(() => import("../pages/Dashboard"));
+const Welcome = lazy(() => import("../pages/Welcome"));
+const Page404 = lazy(() => import("../pages/404"));
+const Blank = lazy(() => import("../pages/Blank"));
+const Charts = lazy(() => import("../pages/Charts"));
+const Leads = lazy(() => import("../pages/Leads"));
+const Calendar = lazy(() => import("../pages/Calendar"));
+const Team = lazy(() => import("../pages/Team"));
+const Transactions = lazy(() => import("../pages/Transactions"));
+const Bills = lazy(() => import("../pages/Bills"));
+const PersonalDetail = lazy(() => import("../pages/PersonalProfile"));
+const EducationDetail = lazy(() => import("../pages/EducationProfile"));
+const ProfessionalDetail = lazy(() => import("../pages/ProfessionalProfile"));
+const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
+const GettingStarted = lazy(() => import("../pages/GettingStarted"));
+const DocFeatures = lazy(() => import("../pages/DocFeatures"));
+const DocComponents = lazy(() => import("../pages/DocComponents"));
 
 const routes = [
   {
-    path: '/dashboard', // the url
+    path: "dashboard", // the url
     component: Dashboard, // view rendered
   },
   {
-    path: '/welcome', // the url
+    path: "welcome", // the url
     component: Welcome, // view rendered
   },
   {
-    path: '/leads',
+    path: "leads",
     component: Leads,
   },
   {
-    path: '/settings-team',
+    path: "settings-team",
     component: Team,
   },
   {
-    path: '/calendar',
+    path: "calendar",
     component: Calendar,
   },
   {
-    path: '/transactions',
+    path: "transactions",
     component: Transactions,
   },
   {
-    path: '/settings-profile',
-    component: ProfileSettings,
+    path: "profile-personal",
+    component: PersonalDetail,
   },
   {
-    path: '/settings-billing',
+    path: "profile-education",
+    component: EducationDetail,
+  },
+  {
+    path: "profile-professional",
+    component: ProfessionalDetail,
+  },
+  {
+    path: "profile-project",
+    component: ProjectDetail,
+  },
+
+  {
+    path: "settings-billing",
     component: Bills,
   },
   {
-    path: '/getting-started',
+    path: "getting-started",
     component: GettingStarted,
   },
   {
-    path: '/features',
+    path: "features",
     component: DocFeatures,
   },
   {
-    path: '/components',
+    path: "components",
     component: DocComponents,
   },
   {
-    path: '/integration',
-    component: Integration,
-  },
-  {
-    path: '/charts',
+    path: "charts",
     component: Charts,
   },
   {
-    path: '/404',
+    path: "404",
     component: Page404,
   },
   {
-    path: '/blank',
+    path: "blank",
     component: Blank,
   },
-]
+];
 
-export default routes
+export default routes;

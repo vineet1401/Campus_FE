@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import InputText from '../../../components/Input/InputText'
 import ErrorText from '../../../components/Typography/ErrorText'
-import { showNotification } from "../../common/headerSlice"
+import { showNotification } from "../../../redux/headerSlice"
 import { addNewLead } from "../leadSlice"
 
 const INITIAL_LEAD_OBJ = {

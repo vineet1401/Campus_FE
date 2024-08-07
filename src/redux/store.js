@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import headerSlice from '../features/common/headerSlice'
-import modalSlice from '../features/common/modalSlice'
-import rightDrawerSlice from '../features/common/rightDrawerSlice'
+import headerSlice from './headerSlice'
+import modalSlice from './modalSlice'
+import rightDrawerSlice from './rightDrawerSlice'
 import leadsSlice from '../features/leads/leadSlice'
 
 const combinedReducer = {

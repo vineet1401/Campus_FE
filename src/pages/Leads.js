@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPageTitle } from '../../features/common/headerSlice'
-import ProfileSettings from '../../features/settings/profilesettings'
+import { setPageTitle } from '../redux/headerSlice'
+import Leads from '../features/leads'
 
 function InternalPage(){
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Settings"}))
+        dispatch(setPageTitle({ title : "Leads"}))
       }, [])
 
 
     return(
-        <ProfileSettings />
+        <Leads />
     )
 }
 
