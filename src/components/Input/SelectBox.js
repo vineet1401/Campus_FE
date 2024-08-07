@@ -1,6 +1,6 @@
 
-import axios from 'axios'
-import capitalize from 'capitalize-the-first-letter'
+// import axios from 'axios'
+// import capitalize from 'capitalize-the-first-letter'
 import React, { useState, useEffect } from 'react'
 import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon'
 
@@ -27,7 +27,7 @@ function SelectBox(props){
             </label>
 
             <select className="select select-bordered w-full" value={value} onChange={(e) => updateValue(e.target.value)}>
-                <option disabled value="PLACEHOLDER">{placeholder}</option>
+                <option aria-readonly value="PLACEHOLDER">{placeholder}</option>
                 {
                     options.map((o, k) => {
                         return <option value={o.value || o.name} key={k}>{o.name}</option>

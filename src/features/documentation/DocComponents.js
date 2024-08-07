@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import TitleCard from "../../components/Cards/TitleCard"
-import { setPageTitle, showNotification } from "../common/headerSlice"
+import { setPageTitle, showNotification } from "../../redux/headerSlice"
 import DocComponentsNav from "./components/DocComponentsNav"
 import ReadMe from "./components/GettingStartedContent"
 import DocComponentsContent from "./components/DocComponentsContent"

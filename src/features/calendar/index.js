@@ -3,9 +3,9 @@ import CalendarView from '../../components/CalendarView'
 import moment from 'moment'
 import { CALENDAR_INITIAL_EVENTS } from '../../utils/dummyData'
 import { useDispatch } from 'react-redux'
-import { openRightDrawer } from '../common/rightDrawerSlice'
+import { openRightDrawer } from '../../redux/rightDrawerSlice'
 import { RIGHT_DRAWER_TYPES } from '../../utils/globalConstantUtil'
-import { showNotification } from '../common/headerSlice'
+import { showNotification } from '../../redux/headerSlice'
 
 
 

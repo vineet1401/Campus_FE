@@ -11,7 +11,7 @@ import LineChart from './components/LineChart'
 import BarChart from './components/BarChart'
 import DashboardTopBar from './components/DashboardTopBar'
 import { useDispatch } from 'react-redux'
-import {showNotification} from '../common/headerSlice'
+import {showNotification} from '../../redux/headerSlice'
 import DoughnutChart from './components/DoughnutChart'
 import { useState } from 'react'
 

@@ -5,7 +5,7 @@ import BellIcon  from '@heroicons/react/24/outline/BellIcon'
 import Bars3Icon  from '@heroicons/react/24/outline/Bars3Icon'
 import MoonIcon from '@heroicons/react/24/outline/MoonIcon'
 import SunIcon from '@heroicons/react/24/outline/SunIcon'
-import { openRightDrawer } from '../features/common/rightDrawerSlice';
+import { openRightDrawer } from '../redux/rightDrawerSlice';
 import { RIGHT_DRAWER_TYPES } from '../utils/globalConstantUtil'
 
 import { NavLink,  Routes, Link , useLocation} from 'react-router-dom'
@@ -89,7 +89,7 @@ function Header(){
 
 
                 {/* Profile icon, opening menu on click */}
-                <div className="dropdown dropdown-end ml-4">
+                {/* <div className="dropdown dropdown-end ml-4">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
                         <img src="https://placeimg.com/80/80/people" alt="profile" />
@@ -106,7 +106,7 @@ function Header(){
                         <div className="divider mt-0 mb-0"></div>
                         <li><a onClick={logoutUser}>Logout</a></li>
                     </ul>
-                </div>
+                </div> */}
             </div>
             </div>
 
