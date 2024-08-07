@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux'
 import {showNotification} from '../common/headerSlice'
 import DoughnutChart from './components/DoughnutChart'
 import { useState } from 'react'
+import Selector from './components/Selector'
+
 
 const statsData = [
     {title : "New Users", value : "34.7k", icon : <UserGroupIcon className='w-8 h-8'/>, description : "↗︎ 2300 (22%)"},
@@ -27,7 +29,8 @@ const statsData = [
 function Dashboard(){
 
     const dispatch = useDispatch()
- 
+    
+    
 
     const updateDashboardPeriod = (newRange) => {
         // Dashboard range changed, write code to refresh your values
@@ -36,6 +39,9 @@ function Dashboard(){
 
     return(
         <>
+        <div className=''>
+        <Selector></Selector>
+        </div>
         {/** ---------------------- Select Period Content ------------------------- */}
             <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod}/>
         
