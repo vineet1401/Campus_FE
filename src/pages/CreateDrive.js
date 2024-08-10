@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPageTitle } from '../../features/common/headerSlice'
-import CreateDrive from '../../features/createDrive'
+import { setPageTitle } from '../redux/headerSlice'
+import CreateDrive from "../features/createDrive"
 
 function InternalPage(){
     const dispatch = useDispatch()

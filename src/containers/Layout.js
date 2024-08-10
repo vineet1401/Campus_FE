@@ -9,7 +9,6 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import ModalLayout from "./ModalLayout";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -45,9 +44,6 @@ function Layout() {
 
       {/** Notification layout container */}
       <NotificationContainer />
-
-      {/* Modal layout container */}
-      <ModalLayout />
     </>
   );
 }

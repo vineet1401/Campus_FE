@@ -10,7 +10,7 @@ import FolderIcon from "@heroicons/react/24/outline/FolderIcon";
 import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import BriefcaseIcon from "@heroicons/react/24/outline/BriefcaseIcon";
 import CodeBracketIcon from "@heroicons/react/24/outline/CodeBracketIcon";
-import { WalletIcon } from "@heroicons/react/16/solid";
+import { PlusCircleIcon, WalletIcon } from "@heroicons/react/16/solid";
 
 const iconClasses = `h-6 w-6`;
 const submenuIconClasses = `h-5 w-5`;
@@ -20,6 +20,11 @@ const routes = [
     path: "/app/dashboard",
     icon: <Squares2X2Icon className={iconClasses} />,
     name: "Dashboard",
+  },
+  {
+    path: '/app/create-drive',
+    icon: <PlusCircleIcon className={iconClasses}/>, 
+    name: 'Create Drive',
   },
   {
     path: "/app/leads", // url

@@ -1,5 +1,5 @@
 import XMarkIcon from "@heroicons/react/24/solid/XMarkIcon";
-import NotificationBodyRightDrawer from "../components/Modals/NotificationBodyRightDrawer";
+import NotificationBodyRightDrawer from  "../components/modals/NotificationBodyRightDrawer"
 
 function RightSidebar() {
   const close = () => {

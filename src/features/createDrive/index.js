@@ -1,13 +1,8 @@
 
-import { useDispatch } from 'react-redux'
-import {showNotification} from '../common/headerSlice'
-import { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import InputText from '../../components/Input/InputText';
-import SearchBar from '../../components/Input/SearchBar';
-import SelectBox from '../../components/Input/SelectBox';
-import TextAreaInput from '../../components/Input/TextAreaInput';
 import ToogleInput from '../../components/Input/ToogleInput';
-import TitleCard from "../../components/Cards/TitleCard"
+import TitleCard from "../../components/Cards/TitleCard";
 
 function CreateDrive(){
 

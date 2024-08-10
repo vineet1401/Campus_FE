@@ -2,7 +2,7 @@
 
 import { lazy } from "react";
 
-const CreateDrive = lazy(() => import('../pages/protected/CreateDrive'))
+const CreateDrive = lazy(() => import('../pages/CreateDrive'))
 
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Welcome = lazy(() => import("../pages/Welcome"));
@@ -28,7 +28,7 @@ const routes = [
     component: Dashboard, // view rendered
   },
   {
-    path: '/create-drive',
+    path: 'create-drive',
     component : CreateDrive,
   },
   {
