@@ -6,7 +6,6 @@ import { showNotification } from "../../../src/redux/headerSlice";
 import InputText from "../../../src/components/Input/InputText";
 import TextAreaInput from "../../../src/components/Input/TextAreaInput";
 import SelectBox from "../../../src/components/Input/SelectBox";
-import DateInput from "../../../src/components/Input/DatePicker";
 
 const RATINGS = [
   { name: "1 - Poor", value: "1" },
@@ -42,7 +41,7 @@ function FeedbackForm() {
             defaultValue=""
             updateFormValue={updateFormValue}
           />
-          <DateInput labelTitle="Date of Joining" />
+          <InputText type='date' labelTitle="Date of Joining" />
           <SelectBox
             labelTitle="Overall Experience"
             defaultValue="Select Rating"

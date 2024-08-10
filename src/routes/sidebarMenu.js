@@ -11,6 +11,7 @@ import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import BriefcaseIcon from "@heroicons/react/24/outline/BriefcaseIcon";
 import CodeBracketIcon from "@heroicons/react/24/outline/CodeBracketIcon";
 import { PlusCircleIcon, WalletIcon } from "@heroicons/react/16/solid";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
 const iconClasses = `h-6 w-6`;
 const submenuIconClasses = `h-5 w-5`;
@@ -22,9 +23,9 @@ const routes = [
     name: "Dashboard",
   },
   {
-    path: '/app/create-drive',
-    icon: <PlusCircleIcon className={iconClasses}/>, 
-    name: 'Create Drive',
+    path: "/app/create-drive",
+    icon: <PlusCircleIcon className={iconClasses} />,
+    name: "Create Drive",
   },
   {
     path: "/app/leads", // url
@@ -56,7 +57,7 @@ const routes = [
   //   path: '', //no url needed as this has submenu
   //   icon: <DocumentDuplicateIcon className={`${iconClasses} inline` }/>, // icon component
   //   name: 'Logout', // name that appear in Sidebar
-  
+
   // //   submenu : [
   // //     {
   // //       path: '/login',
@@ -125,8 +126,15 @@ const routes = [
       //   icon: <UsersIcon className={submenuIconClasses}/>, // icon component
       //   name: 'Team Members', // name that appear in Sidebar
       // },
-    ]
+    ],
   },
+
+  {
+    path: "/app/getting-started", // url
+    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+    name: "FeedBack", // name that appear in Sidebar
+  },
+
   // {
   //   path: '', //no url needed as this has submenu
   //   icon: <DocumentTextIcon className={`${iconClasses} inline` }/>, // icon component
@@ -139,17 +147,16 @@ const routes = [
   //     },
   //     {
   //       path: '/app/features',
-  //       icon: <TableCellsIcon className={submenuIconClasses}/>, 
+  //       icon: <TableCellsIcon className={submenuIconClasses}/>,
   //       name: 'Features',
   //     },
   //     {
   //       path: '/app/components',
-  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>, 
+  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>,
   //       name: 'Components',
   //     }
   //   ]
   // },
-  
-]
+];
 
 export default routes;
