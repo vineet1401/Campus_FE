@@ -56,39 +56,64 @@ const routes = [
     name: 'Result', // name that appear in Sidebar
   },
 
-  // {
-  //   path: '', //no url needed as this has submenu
-  //   icon: <DocumentDuplicateIcon className={`${iconClasses} inline` }/>, // icon component
-  //   name: 'Logout', // name that appear in Sidebar
+  {
+    path: '', //no url needed as this has submenu
+    icon: <DocumentDuplicateIcon className={`${iconClasses} inline` }/>, // icon component
+    name: 'Logout', // name that appear in Sidebar
   
-  // //   submenu : [
-  // //     {
-  // //       path: '/login',
-  // //       icon: <ArrowRightOnRectangleIcon className={submenuIconClasses}/>,
-  // //       name: 'Login',
-  // //     },
-  // //     {
-  // //       path: '/register', //url
-  // //       icon: <UserIcon className={submenuIconClasses}/>, // icon component
-  // //       name: 'Register', // name that appear in Sidebar
-  // //     },
-  // //     {
-  // //       path: '/forgot-password',
-  // //       icon: <KeyIcon className={submenuIconClasses}/>,
-  // //       name: 'Forgot Password',
-  // //     },
-  // //     {
-  // //       path: '/app/blank',
-  // //       icon: <DocumentIcon className={submenuIconClasses}/>,
-  // //       name: 'Blank Page',
-  // //     },
-  // //     {
-  // //       path: '/app/404',
-  // //       icon: <ExclamationTriangleIcon className={submenuIconClasses}/>,
-  // //       name: '404',
-  // //     },
-  // //   ]
-  // },
+    submenu : [
+      {
+        path: '/login',
+        icon: <ArrowRightOnRectangleIcon className={submenuIconClasses}/>,
+        name: 'Login',
+      },
+      {
+        path: '/register', //url
+        icon: <UserIcon className={submenuIconClasses}/>, // icon component
+        name: 'Register', // name that appear in Sidebar
+      },
+      {
+        path: '/forgot-password',
+        icon: <KeyIcon className={submenuIconClasses}/>,
+        name: 'Forgot Password',
+      },
+      {
+        path: '/app/blank',
+        icon: <DocumentIcon className={submenuIconClasses}/>,
+        name: 'Blank Page',
+      },
+      {
+        path: '/app/404',
+        icon: <ExclamationTriangleIcon className={submenuIconClasses}/>,
+        name: '404',
+      },
+    ]
+  },
+
+  //  feedback route
+
+  {
+    path: '/app/getting-started', //no url needed as this has submenu
+    icon: <DocumentTextIcon className={`${iconClasses} inline` }/>, // icon component
+    name: 'Feedback', // name that appear in Sidebar
+    // submenu : [
+    //   {
+    //     path: '/app/getting-started', // url
+    //     icon: <DocumentTextIcon className={submenuIconClasses}/>, // icon component
+    //     name: 'Getting Started', // name that appear in Sidebar
+    //   },
+    //   {
+    //     path: '/app/features',
+    //     icon: <TableCellsIcon className={submenuIconClasses}/>, 
+    //     name: 'Features',
+    //   },
+    //   {
+    //     path: '/app/components',
+    //     icon: <CodeBracketSquareIcon className={submenuIconClasses}/>, 
+    //     name: 'Components',
+    //   }
+    // ]
+  },
   {
     path: '', //no url needed as this has submenu
     icon: <UsersIcon className={`${iconClasses} inline` }/>, // icon component
@@ -114,40 +139,19 @@ const routes = [
         icon: <UserIcon className={submenuIconClasses}/>, // icon component
         name: 'Project Detail', // name that appear in Sidebar
       },
-      // {
-      //   path: '/app/settings-billing',
-      //   icon: <WalletIcon className={submenuIconClasses}/>,
-      //   name: 'Billing',
-      // },
-      // {
-      //   path: '/app/settings-team', // url
-      //   icon: <UsersIcon className={submenuIconClasses}/>, // icon component
-      //   name: 'Team Members', // name that appear in Sidebar
-      // },
+      {
+        path: '/app/settings-billing',
+        icon: <WalletIcon className={submenuIconClasses}/>,
+        name: 'Billing',
+      },
+      {
+        path: '/app/settings-team', // url
+        icon: <UsersIcon className={submenuIconClasses}/>, // icon component
+        name: 'Team Members', // name that appear in Sidebar
+      },
     ]
   },
-  // {
-  //   path: '', //no url needed as this has submenu
-  //   icon: <DocumentTextIcon className={`${iconClasses} inline` }/>, // icon component
-  //   name: 'Documentation', // name that appear in Sidebar
-  //   submenu : [
-  //     {
-  //       path: '/app/getting-started', // url
-  //       icon: <DocumentTextIcon className={submenuIconClasses}/>, // icon component
-  //       name: 'Getting Started', // name that appear in Sidebar
-  //     },
-  //     {
-  //       path: '/app/features',
-  //       icon: <TableCellsIcon className={submenuIconClasses}/>, 
-  //       name: 'Features',
-  //     },
-  //     {
-  //       path: '/app/components',
-  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>, 
-  //       name: 'Components',
-  //     }
-  //   ]
-  // },
+  
   
 ]
 

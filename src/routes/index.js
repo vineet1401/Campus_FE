@@ -19,6 +19,7 @@ const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
 const GettingStarted = lazy(() => import("../pages/GettingStarted"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
+const Feedbackform = lazy(()=> import("../pages/FeedbackForm")) 
 
 const routes = [
   {
@@ -89,6 +90,10 @@ const routes = [
   {
     path: "blank",
     component: Blank,
+  },
+  {
+    path: "feedback",
+    component: Feedbackform,
   },
 ];
 
