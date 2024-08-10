@@ -7,7 +7,6 @@ import InputText from "../../../components/Input/InputText";
 import TextAreaInput from "../../../components/Input/TextAreaInput";
 import ToogleInput from "../../../components/Input/ToogleInput";
 import SelectBox from "../../../components/Input/SelectBox";
-import DateInput from "../../../components/Input/DatePicker";
 
 const GENDER = [
   {
@@ -39,40 +38,39 @@ function PersonalDetail() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputText
             labelTitle="First Name"
-            defaultValue="Alex"
+            placeholder="First Name"
             updateFormValue={updateFormValue}
           />
           <InputText
             labelTitle="Middle Name"
-            defaultValue="Alex"
+            placeholder="Middle Name"
             updateFormValue={updateFormValue}
           />
           <InputText
             labelTitle="Last Name"
-            defaultValue="Alex"
+            placeholder="Last Name"
             updateFormValue={updateFormValue}
           />
           <InputText
             labelTitle="Email Id"
-            defaultValue="alex@dashwind.com"
+            placeholder="Email Id"
             updateFormValue={updateFormValue}
           />
           <InputText
             labelTitle="Phone Number"
-            defaultValue="alex@dashwind.com"
+            placeholder="Phone Number"
             updateFormValue={updateFormValue}
           />
           <SelectBox
             labelTitle="Gender"
-            defaultValue="Select Gender"
             placeholder="Select Gender"
             options={GENDER}
           />
-          <DateInput labelTitle={"Date of Birth"} />
+          <InputText type={'date'} labelTitle={"Date of Birth"} />
           <TextAreaInput
             labelTitle="About"
+            placeholder="About"
             containerStyle={"col-span-2"}
-            defaultValue="Doing what I love, part time traveller"
             updateFormValue={updateFormValue}
           />
         </div>
@@ -81,23 +79,24 @@ function PersonalDetail() {
 
         <h4 className="font-semibold">ADDRESS DETAILS</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <InputText labelTitle="Street" updateFormValue={updateFormValue} />
-          <InputText labelTitle="City" updateFormValue={updateFormValue} />
-          <InputText labelTitle="State" updateFormValue={updateFormValue} />
+          <InputText labelTitle="Street" placeholder="Street" updateFormValue={updateFormValue} />
+          <InputText labelTitle="City" placeholder="City" updateFormValue={updateFormValue} />
+          <InputText labelTitle="State" placeholder="State" updateFormValue={updateFormValue} />
           <InputText
             labelTitle="Postal Code"
+            placeholder="Postal Code"
             updateFormValue={updateFormValue}
           />
-          <InputText labelTitle="Country" updateFormValue={updateFormValue} />
+          <InputText labelTitle="Country" placeholder="Country" updateFormValue={updateFormValue} />
         </div>
 
         <div className="divider"></div>
 
         <h4 className="font-semibold">EMERGENCY CONTACT DETAILS</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <InputText labelTitle="Name" updateFormValue={updateFormValue} />
-          <InputText labelTitle="Relation" updateFormValue={updateFormValue} />
-          <InputText labelTitle="Contact Number" updateFormValue={updateFormValue} />
+          <InputText labelTitle="Name" placeholder="Name" updateFormValue={updateFormValue} />
+          <InputText labelTitle="Relation" placeholder="Relation" updateFormValue={updateFormValue} />
+          <InputText labelTitle="Contact Number" placeholder="Contact Number" updateFormValue={updateFormValue} />
         </div>
 
         <div className="mt-16">

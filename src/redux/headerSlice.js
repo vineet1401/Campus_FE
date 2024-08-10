@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const headerSlice = createSlice({
+const headerSlice = createSlice({
     name: 'header',
     initialState: {
         pageTitle: "Home",  // current page title state management

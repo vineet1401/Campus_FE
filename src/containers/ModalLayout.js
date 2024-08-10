@@ -3,7 +3,7 @@ import { MODAL_BODY_TYPES } from '../utils/globalConstantUtil'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeModal } from '../redux/modalSlice'
 import AddLeadModalBody from '../features/leads/components/AddLeadModalBody'
-import ConfirmationModalBody from '../components/modals/ConfirmationModalBody'
+import ConfirmationModalBody from '../components/Modals/ConfirmationModalBody'
 
 
 function ModalLayout(){
