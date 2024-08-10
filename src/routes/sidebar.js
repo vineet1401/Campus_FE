@@ -30,6 +30,11 @@ const routes = [
     icon: <Square3Stack3DIcon className={iconClasses}/>, 
     name: 'Drives',
   },
+  {
+    path: '/app/create-drive',
+    icon: <PlusCircleIcon className={iconClasses}/>, 
+    name: 'Create Drive',
+  },
   {   
     path: '/app/leads', // url
     icon: <PlusCircleIcon className={iconClasses}/>, // icon component
