@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const modalSlice = createSlice({
+const modalSlice = createSlice({
     name: 'modal',
     initialState: {
         title: "",  // current  title state management

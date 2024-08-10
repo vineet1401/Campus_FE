@@ -45,6 +45,7 @@ function App() {
 
             {/* Place new routes over this */}
             <Route path="/app/*" element={<Layout />}>
+
               {routes.map((route, key) => {
                 return (
                   <Route
@@ -57,6 +58,7 @@ function App() {
               })}
 
               <Route path="*" element={<Page404 />} />
+              
             </Route>
 
             <Route

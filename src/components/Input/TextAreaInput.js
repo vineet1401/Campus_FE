@@ -1,24 +1,40 @@
-import { useState } from "react"
+import { forwardRef, useState } from "react";
 
+const TextAreaInput = ({
+  labelTitle,
+  labelStyle,
+  type,
+  name,
+  containerStyle,
+  defaultValue,
+  placeholder,
+  updateFormValue,
+  updateType,
+}) => {
+  const [value, setValue] = useState(defaultValue ? defaultValue : "");
 
-function TextAreaInput({labelTitle, labelStyle, type, containerStyle, defaultValue, placeholder, updateFormValue, updateType}){
+  const updateInputValue = (name, value) => {
+    setValue(value);
+    updateFormValue({ name, value });
+  };
 
-    const [value, setValue] = useState(defaultValue)
+  return (
+    <div className={`form-control w-full ${containerStyle}`}>
+      <label className="label">
+        <span className={"label-text text-base-content " + labelStyle}>
+          {labelTitle}
+        </span>
+      </label>
+      <textarea
+        value={defaultValue}
+        name={name}
+        rows={1}
+        className="textarea textarea-bordered w-full border-2 border-gray-400 focus:border-gray-700"
+        placeholder={placeholder || ""}
+        onChange={(e) => updateInputValue(e.target.name, e.target.value)}
+      ></textarea>
+    </div>
+  );
+};
 
-    const updateInputValue = (val) => {
-        setValue(val)
-        updateFormValue({updateType, value : val})
-    }
-
-    return(
-        <div className={`form-control w-full ${containerStyle}`}>
-            <label className="label">
-                <span className={"label-text text-base-content " + labelStyle}>{labelTitle}</span>
-            </label>
-            <textarea value={value} className="textarea textarea-bordered w-full" placeholder={placeholder || ""} onChange={(e) => updateInputValue(e.target.value)}></textarea>
-        </div>
-    )
-}
-
-
-export default TextAreaInput
+export default TextAreaInput;

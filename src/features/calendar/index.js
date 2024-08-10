@@ -3,8 +3,6 @@ import CalendarView from '../../components/CalendarView'
 import moment from 'moment'
 import { CALENDAR_INITIAL_EVENTS } from '../../utils/dummyData'
 import { useDispatch } from 'react-redux'
-import { openRightDrawer } from '../../redux/rightDrawerSlice'
-import { RIGHT_DRAWER_TYPES } from '../../utils/globalConstantUtil'
 import { showNotification } from '../../redux/headerSlice'
 
 
@@ -26,17 +24,14 @@ function Calendar(){
         dispatch(showNotification({message : "New Event Added!", status : 1}))
     }
 
-    // Open all events of current day in sidebar 
-    const openDayDetail = ({filteredEvents, title}) => {
-        dispatch(openRightDrawer({header : title, bodyType : RIGHT_DRAWER_TYPES.CALENDAR_EVENTS, extraObject : {filteredEvents}}))
-    }
+
 
     return(
         <>
            <CalendarView 
                 calendarEvents={events}
                 addNewEvent={addNewEvent}
-                openDayDetail={openDayDetail}
+                // openDayDetail={openDayDetail}
            />
         </>
     )

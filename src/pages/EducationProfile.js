@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPageTitle } from '../redux/headerSlice'
-import EducationDetail from '../features/settings/profilesettings/educationDetail'
+import EducationDetail from '../features/profile/personalProfile/educationDetail'
 
 function InternalPage(){
     const dispatch = useDispatch()
