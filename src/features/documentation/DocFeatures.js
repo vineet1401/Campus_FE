@@ -1,39 +1,101 @@
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import TitleCard from "../../components/Cards/TitleCard"
-import { setPageTitle, showNotification } from "../../redux/headerSlice"
-import GettingStartedNav from "./components/GettingStartedNav"
-import ReadMe from "./components/GettingStartedContent"
-import GettingStartedContent from "./components/GettingStartedContent"
-import FeaturesNav from "./components/FeaturesNav"
-import FeaturesContent from "./components/FeaturesContent"
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TitleCard from "../../../src/components/Cards/TitleCard";
+import { showNotification } from "../../../src/redux/headerSlice";
+import InputText from "../../../src/components/Input/InputText";
+import TextAreaInput from "../../../src/components/Input/TextAreaInput";
+import SelectBox from "../../../src/components/Input/SelectBox";
+import DateInput from "../../../src/components/Input/DatePicker";
 
+const RATINGS = [
+  { name: "1 - Poor", value: "1" },
+  { name: "2 - Fair", value: "2" },
+  { name: "3 - Good", value: "3" },
+  { name: "4 - Very Good", value: "4" },
+  { name: "5 - Excellent", value: "5" },
+];
 
+function FeedbackForm() {
+  const dispatch = useDispatch();
 
-function Features(){
+  // Call API to submit feedback
+  const submitFeedback = () => {
+    dispatch(showNotification({ message: "Feedback Submitted", status: 1 }));
+  };
 
-    const dispatch = useDispatch()
+  const updateFormValue = ({ updateType, value }) => {
+    console.log(updateType, value);
+  };
 
-    useEffect(() => {
-        dispatch(setPageTitle({ title : "Documentation"}))
-      }, [])
+  return (
+    <>
+      <TitleCard title="Company Feedback Form" topMargin="mt-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <InputText
+            labelTitle="Student Name"
+            defaultValue=""
+            updateFormValue={updateFormValue}
+          />
+          <InputText
+            labelTitle="Company Name"
+            defaultValue=""
+            updateFormValue={updateFormValue}
+          />
+          <DateInput labelTitle="Date of Joining" />
+          <SelectBox
+            labelTitle="Overall Experience"
+            defaultValue="Select Rating"
+            placeholder="Select Rating"
+            options={RATINGS}
+            updateFormValue={updateFormValue}
+          />
+          <SelectBox
+            labelTitle="Work Environment"
+            defaultValue="Select Rating"
+            placeholder="Select Rating"
+            options={RATINGS}
+            updateFormValue={updateFormValue}
+          />
+          <SelectBox
+            labelTitle="Support from Seniors"
+            defaultValue="Select Rating"
+            placeholder="Select Rating"
+            options={RATINGS}
+            updateFormValue={updateFormValue}
+          />
+          <SelectBox
+            labelTitle="Training & Development"
+            defaultValue="Select Rating"
+            placeholder="Select Rating"
+            options={RATINGS}
+            updateFormValue={updateFormValue}
+          />
+          <TextAreaInput
+            labelTitle="Suggestions for Improvement"
+            containerStyle={"col-span-2"}
+            defaultValue=""
+            updateFormValue={updateFormValue}
+          />
+          <TextAreaInput
+            labelTitle="Additional Comments"
+            containerStyle={"col-span-2"}
+            defaultValue=""
+            updateFormValue={updateFormValue}
+          />
+        </div>
 
-
-    return(
-        <>
-            <div className="bg-base-100  flex overflow-hidden  rounded-lg" style={{height : "82vh"}}>
-                    <div className="flex-none p-4">
-                        <FeaturesNav activeIndex={1}/>
-                    </div>
-
-                    <div className="grow pt-16  overflow-y-scroll">
-                        <FeaturesContent />
-                    </div>
-
-                </div>
-           
-        </>
-    )
+        <div className="mt-16">
+          <button
+            className="btn btn-primary float-right"
+            onClick={() => submitFeedback()}
+          >
+            Submit Feedback
+          </button>
+        </div>
+      </TitleCard>
+    </>
+  );
 }
 
-export default Features
+export default FeedbackForm;

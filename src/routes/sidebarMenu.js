@@ -56,7 +56,7 @@ const routes = [
   //   path: '', //no url needed as this has submenu
   //   icon: <DocumentDuplicateIcon className={`${iconClasses} inline` }/>, // icon component
   //   name: 'Logout', // name that appear in Sidebar
-
+  
   // //   submenu : [
   // //     {
   // //       path: '/login',
@@ -125,7 +125,7 @@ const routes = [
       //   icon: <UsersIcon className={submenuIconClasses}/>, // icon component
       //   name: 'Team Members', // name that appear in Sidebar
       // },
-    ],
+    ]
   },
   // {
   //   path: '', //no url needed as this has submenu
@@ -139,16 +139,17 @@ const routes = [
   //     },
   //     {
   //       path: '/app/features',
-  //       icon: <TableCellsIcon className={submenuIconClasses}/>,
+  //       icon: <TableCellsIcon className={submenuIconClasses}/>, 
   //       name: 'Features',
   //     },
   //     {
   //       path: '/app/components',
-  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>,
+  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>, 
   //       name: 'Components',
   //     }
   //   ]
   // },
-];
+  
+]
 
 export default routes;
