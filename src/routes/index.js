@@ -1,5 +1,6 @@
 // All components mapping with path for internal routes
 
+import { compose } from "@reduxjs/toolkit";
 import { lazy } from "react";
 
 const CreateDrive = lazy(() => import('../pages/CreateDrive'))
@@ -22,8 +23,24 @@ const Feedback = lazy(() => import("../pages/Feedback"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
 const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
+const Feedbackform = lazy(()=> import("../pages/FeedbackForm")) ;
+const Integration = lazy(()=> import("../pages/NoticBoard")) ;
+
+const AddNotice = lazy(()=> import("../pages/AddNotice")) ;
+
+
 
 const routes = [
+
+  {
+    path: "integration", // the url
+    component: Integration, // view rendered
+  },
+  {
+    path:"addNotice",
+    component:AddNotice
+    
+  },
   {
     path: "dashboard", // the url
     component: Dashboard, // view rendered
