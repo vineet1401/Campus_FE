@@ -23,7 +23,7 @@ const Feedback = lazy(() => import("../pages/Feedback"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
 const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
-const Feedbackform = lazy(()=> import("../pages/FeedbackForm")) ;
+const Feedbackform = lazy(()=> import("../pages/Feedback")) ;
 const Integration = lazy(()=> import("../pages/NoticBoard")) ;
 
 const AddNotice = lazy(()=> import("../pages/AddNotice")) ;

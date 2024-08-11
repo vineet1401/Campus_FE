@@ -28,6 +28,7 @@ function AddNotificationForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputText
             labelTitle="Notification Title"
+            placeholder="Notification Title"
             defaultValue=""
             updateFormValue={updateFormValue}
           />
@@ -39,13 +40,14 @@ function AddNotificationForm() {
           />
           <SelectBox
             labelTitle="Notification Type"
+            placeholder="Notification Type"
             defaultValue="Select Type"
-            placeholder="Select Type"
             options={NOTIFICATION_TYPES}
             updateFormValue={updateFormValue}
           />
           <TextAreaInput
             labelTitle="Description"
+            placeholder="Description"
             containerStyle={"col-span-2"}
             defaultValue=""
             updateFormValue={updateFormValue}
