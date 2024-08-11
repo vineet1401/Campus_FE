@@ -17,6 +17,8 @@ const iconClasses = `h-6 w-6`;
 const submenuIconClasses = `h-5 w-5`;
 
 const routes = [
+
+ 
   {
     path: "/app/dashboard",
     icon: <Squares2X2Icon className={iconClasses} />,
@@ -43,10 +45,15 @@ const routes = [
     name: "Alumani", // name that appear in Sidebar
   },
   {
-    path: "/app/integration", // url
-    icon: <BoltIcon className={iconClasses} />, // icon component
-    name: "Assesment", // name that appear in Sidebar
+    path: "/app/integration",
+    icon: <Squares2X2Icon className={iconClasses} />,
+    name: "Notice",
   },
+  // {
+  //   path: "/app/integration", // url
+  //   icon: <BoltIcon className={iconClasses} />, // icon component
+  //   name: "Assesment", // name that appear in Sidebar
+  // },
   {
     path: "/app/calendar", // url
     icon: <CalendarDaysIcon className={iconClasses} />, // icon component
@@ -116,6 +123,7 @@ const routes = [
         icon: <CodeBracketIcon className={submenuIconClasses} />, // icon component
         name: "Project Detail", // name that appear in Sidebar
       },
+
       // {
       //   path: '/app/settings-billing',
       //   icon: <WalletIcon className={submenuIconClasses}/>,
@@ -133,6 +141,11 @@ const routes = [
     path: "/app/getting-started", // url
     icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
     name: "FeedBack", // name that appear in Sidebar
+  },
+  {
+    path: "/app/addNotice", // url
+    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+    name: "AddNotice", // name that appear in Sidebar
   },
 
   // {
