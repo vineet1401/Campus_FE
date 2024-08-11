@@ -10,39 +10,36 @@ import SearchBar from "../../components/Input/SearchBar"
 
 
 
-function GettingStarted(){
+function GettingStarted() {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Feedback"}))
-      }, [])
+        dispatch(setPageTitle({ title: "Feedback" }))
+    }, [])
 
 
-    return(
+    return (
         <>
-        <TitleCard title="Company Feedback" >
-        {/* <SearchBar /> */}
-            <div className="bg-base-100  flex overflow-hidden  rounded-lg" >
+            <TitleCard title="Company Feedback" >
+                {/* <SearchBar /> */}
+                <div className="bg-base-100  flex overflow-hidden  rounded-lg" >
                     {/* <div className="flex-none p-4">
                         <GettingStartedNav activeIndex={1}/>
                     </div> */}
-                    
-                    
-                    
+
+
+
                     <div className="grow pt-2  ">
                         <GettingStartedContent />
-                        
-                        
-                    
                     </div>
 
-                    
+
 
                 </div>
 
-        </TitleCard>        
-           
+            </TitleCard>
+
         </>
     )
 }
