@@ -130,9 +130,14 @@ const routes = [
   },
 
   {
-    path: "/app/getting-started", // url
+    path: "/app/feedback", // url
     icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
     name: "FeedBack", // name that appear in Sidebar
+  },
+  {
+    path: "/app/View", // url
+    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+    name: "View", // name that appear in Sidebar
   },
 
   // {

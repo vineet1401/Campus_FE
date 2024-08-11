@@ -18,10 +18,10 @@ const PersonalDetail = lazy(() => import("../pages/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/EducationProfile"));
 const ProfessionalDetail = lazy(() => import("../pages/ProfessionalProfile"));
 const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
-const GettingStarted = lazy(() => import("../pages/GettingStarted"));
+const Feedback = lazy(() => import("../pages/Feedback"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
-const Feedbackform = lazy(()=> import("../pages/FeedbackForm")) 
+const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
 
 const routes = [
   {
@@ -74,8 +74,8 @@ const routes = [
     component: Bills,
   },
   {
-    path: "getting-started",
-    component: GettingStarted,
+    path: "feedback",
+    component: Feedback,
   },
   {
     path: "features",
@@ -98,8 +98,8 @@ const routes = [
     component: Blank,
   },
   {
-    path: "feedback",
-    component: Feedbackform,
+    path: "view",
+    component: ViewFeedback,
   },
 ];
 
