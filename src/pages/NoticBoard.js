@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPageTitle } from '../features/common/headerSlice'
-import Integration from '../features/noticBoard'
+import ViewNotice from '../features/noticBoard'
 
 function InternalPage(){
 
@@ -12,7 +12,7 @@ function InternalPage(){
       }, [])
       
     return(
-        <Integration />
+        <ViewNotice/>
     )
 }
 
