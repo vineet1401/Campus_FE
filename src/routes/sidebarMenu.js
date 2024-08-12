@@ -45,7 +45,7 @@ const routes = [
     name: "Alumani", // name that appear in Sidebar
   },
   {
-    path: "/app/integration",
+    path: "/app/notice-board",
     icon: <Squares2X2Icon className={iconClasses} />,
     name: "Notice",
   },
@@ -148,9 +148,9 @@ const routes = [
     name: "View", // name that appear in Sidebar
   },
   {
-    path: "/app/addNotice", // url
+    path: "/app/add-notice", // url
     icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
-    name: "AddNotice", // name that appear in Sidebar
+    name: "Add Notice", // name that appear in Sidebar
   },
 
   // {

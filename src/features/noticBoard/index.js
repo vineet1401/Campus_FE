@@ -151,7 +151,7 @@ const INITIAL_INTEGRATION_LIST = [
     { name: "Meta", icon: "https://cdn-icons-png.flaticon.com/512/5968/5968872.png", description: "American developer and marketer of software products.", ctc: "16 LPA", location: "Kolkata", date: "2024-08-30" },
 ];
 
-function Integration() {
+function ViewNotice() {
     const [integrationList] = useState(INITIAL_INTEGRATION_LIST);
 
     const handleApply = (name) => {
@@ -174,7 +174,7 @@ function Integration() {
                                     <p><strong>Date:</strong> {i.date}</p>
                                 </div>
                             </div>
-                            <button onClick={() => handleApply(i.name)} className="btn btn-success ml-4">Apply for It</button>
+                            <button onClick={() => handleApply(i.name)} className="btn btn-success ml-4">View</button>
                         </div>
                     </TitleCard>
                 ))}
@@ -183,4 +183,4 @@ function Integration() {
     );
 }
 
-export default Integration;
+export default ViewNotice;
