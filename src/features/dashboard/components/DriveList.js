@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "./Card";
-import { Modal } from "./ModalDetails";
+import { useNavigate } from 'react-router-dom';
 const DriveList = ({ data }) => {
   // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [selectedDrive, setSelectedDrive] = useState(null);
-
+  //const [isModalOpen, setModalOpen] = useState(false);
+  //const [selectedDrive, setSelectedDrive] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     // Simulate fetch time
@@ -16,14 +16,17 @@ const DriveList = ({ data }) => {
     }, 1000);
   }, []);
 
-  const openModal = (drive) => {
-    setSelectedDrive(drive);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setSelectedDrive(null);
-    setModalOpen(false);
+//const openModal = (drive) => {
+//  setSelectedDrive(drive);
+//  setModalOpen(true);
+//};
+//
+//const closeModal = () => {
+//  setSelectedDrive(null);
+//  setModalOpen(false);
+//};
+  const handleonClick = (drive) => {
+    navigate(`/app/drive-details/${drive.id}`);
   };
 
   return (
@@ -40,7 +43,7 @@ const DriveList = ({ data }) => {
               key={drive.id}
               className="opacity-0 transition-opacity duration-500 ease-in-out delay-100 opacity-100"
             >
-              <Card {...drive} onClick={() => openModal(drive)} />
+              <Card {...drive} onClick={() => handleonClick(drive)} />
             </div>
           ))}
         </div>
@@ -49,7 +52,7 @@ const DriveList = ({ data }) => {
       )}
 
       {/* Modal component */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      {/*<Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedDrive && (
           <div>
             <h1 className="text-3xl font-bold mb-4">
@@ -75,10 +78,10 @@ const DriveList = ({ data }) => {
             <p>
               <strong>Description:</strong> {selectedDrive.description}
             </p>
-            {/* Add more fields if needed */}
+            
           </div>
         )}
-      </Modal>
+      </Modal>*/}
     </div>
   );
 };
