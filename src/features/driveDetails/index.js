@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getDrives } from '../../features/dashboard/components/drivesAPI';
 import { useNavigate } from 'react-router-dom';
+import DriveDetailsSkeleton from './components/DriveDetailsSkeleton';
 
 function Details({ id }) {
-  const navigate = useNavigate();
-  const drives = getDrives(); // Fetch all drives
-  const drive = drives.find(drive => drive.id === Number(id)); // Find the drive by ID
+  const [loading, setLoading] = useState(true);
+  const [drive, setDrive] = useState(null);
 
-  if (!drive) {
-    return <p>Drive not found</p>;
-  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Simulating an API call
+    const fetchDrives = async () => {
+      const drives = await getDrives(); // Fetch all drives
+      const selectedDrive = drives.find(drive => drive.id === Number(id)); // Find the drive by ID
+      setDrive(selectedDrive);
+      setLoading(false); // Set loading to false after data is fetched
+    };
+
+    fetchDrives();
+  }, [id]);
 
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
@@ -20,18 +30,33 @@ function Details({ id }) {
     alert("Redirecting to Apply Page");
   };
 
+  if (loading) {
+    return <DriveDetailsSkeleton />;
+  }
+
+  if (!drive) {
+    return <p>Drive not found</p>;
+  }
+
   const isCurrent = drive.status === "Current"; // Check if the drive is current
 
   return (
     <div className="p-8 flex flex-col md:flex-row">
       {/* Left section */}
       <div className="md:w-1/3 flex flex-col items-center block text-center md:text-left">
-        <img 
-          src={drive.logoUrl} 
-          alt={drive.companyName} 
-          className="h-64 w-full sm:h-80 lg:h-60 mb-4 border border-gray-300 rounded-lg" 
-        />
-        
+        <div className='relative block overflow-hidden rounded-lg border border-gray-300 shadow-lg dark:shadow-gray-700'>
+          <span
+            className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
+          ></span>
+          <div className="h-50 w-full">
+            <img 
+              src={drive.logoUrl} 
+              alt={drive.companyName} 
+              className="h-full w-full rounded-lg" 
+            />
+          </div>
+        </div>
+
         <h2 className="mt-4 max-w-sm text-xl font-semibold">{drive.companyName}</h2>
         <address className="text-gray-600 mt-4">
           {drive.address}
