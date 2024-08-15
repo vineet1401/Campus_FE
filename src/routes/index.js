@@ -1,5 +1,6 @@
 // All components mapping with path for internal routes
 
+import { compose } from "@reduxjs/toolkit";
 import { lazy } from "react";
 
 const CreateDrive = lazy(() => import('../pages/CreateDrive'))
@@ -17,13 +18,29 @@ const PersonalDetail = lazy(() => import("../pages/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/EducationProfile"));
 const ProfessionalDetail = lazy(() => import("../pages/ProfessionalProfile"));
 const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
-const GettingStarted = lazy(() => import("../pages/GettingStarted"));
+const Feedback = lazy(() => import("../pages/Feedback"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
-const Feedbackform = lazy(()=> import("../pages/FeedbackForm")) 
+const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
+const Feedbackform = lazy(()=> import("../pages/Feedback")) ;
+const NoticeBoard = lazy(()=> import("../pages/NoticBoard")) ;
+
+const AddNotice = lazy(()=> import("../pages/AddNotice")) ;
+
+
 
 
 const routes = [
+
+  {
+    path: "notice-board", // the url
+    component: NoticeBoard, // view rendered
+  },
+  {
+    path:"add-notice",
+    component:AddNotice
+    
+  },
   {
     path: "dashboard", // the url
     component: Dashboard, // view rendered
@@ -74,8 +91,8 @@ const routes = [
     component: Bills,
   },
   {
-    path: "getting-started",
-    component: GettingStarted,
+    path: "feedback",
+    component: Feedback,
   },
   {
     path: "features",
@@ -98,8 +115,8 @@ const routes = [
     component: Blank,
   },
   {
-    path: "feedback",
-    component: Feedbackform,
+    path: "view",
+    component: ViewFeedback,
   },
 ];
 
