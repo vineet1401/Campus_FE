@@ -9,9 +9,7 @@ function GettingStartedContent() {
 
     // Combine all drive data into one array
     const allDrives = [
-        ...getCurrentDrives(),
-        ...getFinishedDrives(),
-        ...getUpcomingDrives()
+        getDrives,
     ];
 
     const openModal = () => {
