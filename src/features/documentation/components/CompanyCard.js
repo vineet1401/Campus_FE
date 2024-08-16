@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FeedbackModal from '../FeedbackModal';
-import { getCurrentDrives, getFinishedDrives, getUpcomingDrives } from '../../../features/dashboard/components/drivesAPI';
+import { getDrives } from '../../../features/dashboard/components/drivesAPI';
 
 function GettingStartedContent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
