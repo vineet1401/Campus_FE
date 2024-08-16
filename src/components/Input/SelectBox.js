@@ -15,17 +15,17 @@ function SelectBox(props) {
     updateType,
     updateFormValue,
   } = props;
-
+  
   const [value, setValue] = useState(defaultValue || "");
 
   const updateValue = (newValue) => {
-    updateFormValue({ updateType, value: newValue });
-    setValue(newValue);
+    setValue(newValue); // Update local state
+    updateFormValue(newValue); // Call the update function passed as prop
   };
 
   return (
     <div className={`inline-block ${containerStyle}`}>
-      <label className={`label  ${labelStyle}`}>
+      <label className={`label ${labelStyle}`}>
         <div className="label-text">
           {labelTitle}
           {labelDescription && (
@@ -44,13 +44,11 @@ function SelectBox(props) {
         <option aria-readonly value="PLACEHOLDER">
           {placeholder}
         </option>
-        {options.map((o, k) => {
-          return (
-            <option value={o.value || o.name} key={k}>
-              {o.name}
-            </option>
-          );
-        })}
+        {options.map((o, k) => (
+          <option value={o.value || o.name} key={k}>
+            {o.name}
+          </option>
+        ))}
       </select>
     </div>
   );

@@ -1,64 +1,17 @@
 import { useState, useEffect } from "react";
 import DriveList from "./DriveList";
-
-
-const data = [
-  {
-    id: 1,
-    companyName: "Google",
-    logoUrl:
-      "https://1000logos.net/wp-content/uploads/2016/11/Google-Symbol.png",
-    salaryPackage: "12 LPA",
-    driveDate: "2024-09-15",
-    designation: "Software Engineer",
-    location: "Pune",
-    status: "Current",
-  },
-  {
-    id: 2,
-    companyName: "Meta",
-    logoUrl: "https://1000logos.net/wp-content/uploads/2021/10/Meta-Symbol.png",
-    salaryPackage: "10 LPA",
-    driveDate: "2024-09-20",
-    designation: "Frontend Developer",
-    location: "Mumbai",
-    status: "Current",
-  },
-  {
-    id: 3,
-    companyName: "Amazon",
-    logoUrl:
-      "https://1000logos.net/wp-content/uploads/2016/10/Amazon-logo-meaning.jpg",
-    salaryPackage: "8 LPA",
-    driveDate: "2024-08-01",
-    designation: "Data Analyst",
-    location: "Bangalore",
-    status: "Finished",
-  },
-  {
-    id: 4,
-    companyName: "Apple",
-    logoUrl:
-      "https://1000logos.net/wp-content/uploads/2017/02/Apple-Logosu.png",
-    salaryPackage: "14 LPA",
-    driveDate: "2024-10-10",
-    designation: "Cyber Security Engineer",
-    location: "Hyderabad",
-    status: "Upcoming",
-  },
-];
+import { getDrives } from "./drivesAPI";
 
 function Selector() {
   const [activeTab, setActiveTab] = useState("Current");
-
-
   const [drives, setDrive] = useState([]);
 
   useEffect(() => {
-    (function () {
-      setDrive(data.filter((item) => item.status == activeTab));
-    })();
-  }, [activeTab]);
+    // Fetch data and filter based on activeTab
+    const allDrives = getDrives(); // Get the drives data from the drivesAPI.js file
+    const filteredDrives = allDrives.filter((item) => item.status === activeTab);
+    setDrive(filteredDrives);
+  }, [activeTab]); // Re-run when activeTab changes
 
   return (
     <div>

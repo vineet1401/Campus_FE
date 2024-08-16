@@ -1,5 +1,13 @@
-export const Card = ({ id,companyName, logoUrl, salaryPackage, driveDate, designation, location ,onClick}) => (
-    <div
+import React from 'react';
+
+export const Card = ({ id,companyName, logoUrl, salaryPackage, driveDate, designation, location ,onClick}) => {
+  
+
+
+  
+
+    return (
+                      <div
                           onClick={onClick}
                           className="relative block shadow overflow-hidden rounded-lg border border-black dark:border-white p-4 sm:p-6 lg:p-8 shadow-lg dark:shadow-gray-700"
                         >
@@ -39,4 +47,5 @@ export const Card = ({ id,companyName, logoUrl, salaryPackage, driveDate, design
                             </div>
                           </dl>
                         </div>
-  );
+                        );
+};
