@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import FeedbackModal from './FeedbackModal';
-import { getCurrentDrives, getFinishedDrives, getUpcomingDrives } from '../../../src/features/dashboard/components/drivesAPI';
+import FeedbackModal from '../FeedbackModal';
+import { getDrives } from '../../../features/dashboard/components/drivesAPI';
 
 function GettingStartedContent() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,9 +9,7 @@ function GettingStartedContent() {
 
     // Combine all drive data into one array
     const allDrives = [
-        ...getCurrentDrives(),
-        ...getFinishedDrives(),
-        ...getUpcomingDrives()
+        getDrives,
     ];
 
     const openModal = () => {

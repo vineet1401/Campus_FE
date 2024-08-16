@@ -8,14 +8,18 @@ function Details({ id }) {
   const [drive, setDrive] = useState(null);
 
   const navigate = useNavigate();
-
   useEffect(() => {
-    // Simulating an API call
+    
     const fetchDrives = async () => {
       const drives = await getDrives(); // Fetch all drives
       const selectedDrive = drives.find(drive => drive.id === Number(id)); // Find the drive by ID
       setDrive(selectedDrive);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(true);
+    // Simulate fetch time
+    setTimeout(() => {
+      // setData(DriveListDrives());
+      setLoading(false);
+    }, 1000); // Set loading to false after data is fetched
     };
 
     fetchDrives();
