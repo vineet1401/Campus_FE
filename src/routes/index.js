@@ -22,9 +22,9 @@ const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
 const Feedback = lazy(() => import("../pages/Feedback"));
 const DocFeatures = lazy(() => import("../pages/DocFeatures"));
 const DocComponents = lazy(() => import("../pages/DocComponents"));
-const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
+const ViewFeedback = lazy(()=> import("../pages/ViewFeedback"))
 const Feedbackform = lazy(()=> import("../pages/Feedback")) ;
-const Integration = lazy(()=> import("../pages/NoticBoard")) ;
+const NoticeBoard = lazy(()=> import("../pages/NoticBoard")) ;
 
 const AddNotice = lazy(()=> import("../pages/AddNotice")) ;
 
@@ -33,11 +33,11 @@ const AddNotice = lazy(()=> import("../pages/AddNotice")) ;
 const routes = [
 
   {
-    path: "integration", // the url
-    component: Integration, // view rendered
+    path: "notice-board", // the url
+    component: NoticeBoard, // view rendered
   },
   {
-    path:"addNotice",
+    path:"add-notice",
     component:AddNotice
     
   },

@@ -1,47 +1,45 @@
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import TitleCard from "../../components/Cards/TitleCard"
-import { setPageTitle, showNotification } from "../../redux/headerSlice"
-import GettingStartedNav from "./components/GettingStartedNav"
-import ReadMe from "./components/GettingStartedContent"
-import GettingStartedContent from "./components/CompanyCard"
-import SearchBar from "../../components/Input/SearchBar"
+// import { useEffect, useState } from "react"
+// import { useDispatch } from "react-redux"
+// import TitleCard from "../../components/Cards/TitleCard"
+// import { setPageTitle, showNotification } from "../../redux/headerSlice"
+// import GettingStartedNav from "./components/GettingStartedNav"
+// import ReadMe from "./components/GettingStartedContent"
+// import GettingStartedContent from "../feedback/CompanyCard"
+// import SearchBar from "../../components/Input/SearchBar"
 
 
 
 
-function GettingStarted() {
+// function GettingStarted() {
 
-    const dispatch = useDispatch()
+//     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Feedback" }))
-    }, [])
+//     useEffect(() => {
+//         dispatch(setPageTitle({ title: "Feedback" }))
+//     }, [])
 
 
-    return (
-        <>
-            <TitleCard title="Company Feedback" >
-                {/* <SearchBar /> */}
-                <div className="bg-base-100  flex overflow-hidden  rounded-lg" >
-                    {/* <div className="flex-none p-4">
-                        <GettingStartedNav activeIndex={1}/>
-                    </div> */}
+//     return (
+//         <>
+//             <TitleCard title="Company Feedback" >
+                
+//                 <div className="bg-base-100  flex overflow-hidden  rounded-lg" >
+                    
 
 
 
-                    <div className="grow pt-2  ">
-                        <GettingStartedContent />
-                    </div>
+//                     <div className="grow pt-2  ">
+//                         <GettingStartedContent />
+//                     </div>
 
 
 
-                </div>
+//                 </div>
 
-            </TitleCard>
+//             </TitleCard>
 
-        </>
-    )
-}
+//         </>
+//     )
+// }
 
-export default GettingStarted
+// export default GettingStarted

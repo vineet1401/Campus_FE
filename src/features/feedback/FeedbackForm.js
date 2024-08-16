@@ -1,9 +1,10 @@
 import React from 'react';
-import InputText from "../../../src/components/Input/InputText";
-import TextAreaInput from "../../../src/components/Input/TextAreaInput";
-import SelectBox from "../../../src/components/Input/SelectBox";
+import InputText from "../../components/Input/InputText";
+import TextAreaInput from "../../components/Input/TextAreaInput";
+import SelectBox from "../../components/Input/SelectBox";
 import { useDispatch } from 'react-redux';
 import { showNotification } from '../../redux/headerSlice'; // Adjust path as needed
+import { useState } from 'react';
 
 const RATINGS = [
   { name: "1 - Poor", value: "1" },
@@ -15,7 +16,7 @@ const RATINGS = [
 
 function FeedbackForm() {
   const dispatch = useDispatch();
-  const [formValues, setFormValues] = React.useState({
+  const [formValues, setFormValues] = useState({
     studentName: '',
     dateOfJoining: '',
     overallExperience: '',
