@@ -54,9 +54,7 @@ export const Card = ({
       </dl>
       <div className="mt-2 flex justify-between">
         <NavLink to="/app/view-feedback">
-          <button className="btn btn-primary p-1 ">
-            View FeedBack
-          </button>
+          <button className="btn btn-primary p-1 ">View FeedBack</button>
         </NavLink>
         <button onClick={onClick} className="btn btn-primary p-1 ">
           View Details

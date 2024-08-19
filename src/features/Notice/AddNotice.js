@@ -4,11 +4,7 @@ import InputText from "../../components/Input/InputText";
 import TextAreaInput from "../../components/Input/TextAreaInput";
 import SelectBox from "../../components/Input/SelectBox";
 import { showNotification } from "../../redux/headerSlice";
-
-const NOTIFICATION_TYPES = [
-  { name: "Company Drive", value: "drive" },
-  { name: "New Company Arrival", value: "arrival" },
-];
+import AddNoticeInputs from "../../components/FormsInputs/AddNoticeInputs";
 
 function AddNotificationForm() {
   const dispatch = useDispatch();
@@ -16,7 +12,7 @@ function AddNotificationForm() {
   // Call API to add notification
   const addNotification = () => {
     // dispatch(showNotification({ message: "Notification Added", status: 1 }));
-    console.log("Notification Added")
+    console.log("Notification Added");
   };
 
   const updateFormValue = ({ updateType, value }) => {
@@ -26,35 +22,7 @@ function AddNotificationForm() {
   return (
     <>
       <TitleCard title="Add Notification" topMargin="mt-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputText
-            labelTitle="Notification Title"
-            placeholder="Notification Title"
-            defaultValue=""
-            updateFormValue={updateFormValue}
-          />
-          <InputText
-            type='date'
-            labelTitle="Date"
-            defaultValue=""
-            updateFormValue={updateFormValue}
-          />
-          <SelectBox
-            labelTitle="Notification Type"
-            placeholder="Notification Type"
-            defaultValue="Select Type"
-            options={NOTIFICATION_TYPES}
-            updateFormValue={updateFormValue}
-          />
-          <TextAreaInput
-            labelTitle="Description"
-            placeholder="Description"
-            containerStyle={"col-span-2"}
-            defaultValue=""
-            updateFormValue={updateFormValue}
-          />
-        </div>
-
+        <AddNoticeInputs />
         <div className="mt-16">
           <button
             className="btn btn-primary float-right"

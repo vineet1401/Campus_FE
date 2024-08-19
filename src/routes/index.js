@@ -22,8 +22,8 @@ const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
 // Pages for Profile
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/Profile/EducationProfile"));
-const ProfessionalDetail = lazy(() =>
-  import("../pages/Profile/ProfessionalProfile")
+const ExperienceDetail = lazy(() =>
+  import("../pages/Profile/ExperienceProfile")
 );
 const ProjectDetail = lazy(() => import("../pages/Profile/ProjectProfile"));
 
@@ -83,7 +83,7 @@ const routes = [
     path: "profile-professional",
     component: (
       <Student>
-        <ProfessionalDetail />
+        <ExperienceDetail />
       </Student>
     ),
   },

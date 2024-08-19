@@ -1,25 +1,19 @@
-import {useState, useRef,useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import { useDispatch } from "react-redux"
-import { setPageTitle } from '../../redux/headerSlice'
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../redux/headerSlice";
 // import  GettingStarted from '../features/documentation/DocGettingStarted'
-import CompanyCard from '../../features/Feedback/AppliedDrive'
-import TitleCard from '../../components/Cards/TitleCard'
+import AppliedDrivesList from "../../features/Feedback/AppliedDrive";
+import TitleCard from "../../components/Cards/TitleCard";
 
-function InternalPage(){
+function InternalPage() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setPageTitle({ title: "Feedback" }));
+  }, []);
 
-    useEffect(() => {
-        dispatch(setPageTitle({ title: "Feedback" }))
-    }, [])
-
-
-    return(
-        <div className="">
-            <CompanyCard />
-        </div>
-    )
+  return <AppliedDrivesList />;
 }
 
-export default InternalPage
+export default InternalPage;

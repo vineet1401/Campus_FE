@@ -19,7 +19,7 @@ const GENDER = [
   },
 ];
 
-function PersonalDetail() {
+function PersonalPage() {
   const dispatch = useDispatch();
 
   // Call API to update profile settings changes
@@ -112,4 +112,4 @@ function PersonalDetail() {
   );
 }
 
-export default PersonalDetail;
+export default PersonalPage;

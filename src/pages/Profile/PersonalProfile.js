@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPageTitle } from '../../redux/headerSlice'
-import PersonalDetail from '../../features/Profile/personalDetail'
+import PersonalPage from '../../features/Profile/PersonalPage'
 
 
 function InternalPage(){
@@ -13,7 +13,7 @@ function InternalPage(){
 
 
     return(
-        <PersonalDetail />
+        <PersonalPage />
     )
 }
 

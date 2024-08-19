@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import DriveList from "./DriveList";
+import DriveList from "../../components/Drive/DriveList";
 import { getDrives } from "./drivesAPI";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../redux/headerSlice";
+import FilterButtons from "../../components/Filter/FilterButtons";
 
 function DriveHomePage() {
   const dispatch = useDispatch();
+
+  const tabList = ["Current", "Upcoming", "Finished"];
 
   const [activeTab, setActiveTab] = useState("Current");
   const [drives, setDrive] = useState([]);
@@ -32,39 +35,11 @@ function DriveHomePage() {
   return (
     <>
       <div>
-        <div className="flex w-full join flex-col lg:flex-row">
-          <button
-            onClick={() => setActiveTab("Current")}
-            className={`card stats shadow rounded-box join-item grid h-10 flex-grow place-items-center dark:text-slate-300 ${
-              activeTab === "Current"
-                ? "bg-blue-700 transition delay-100 duration-300 ease-in-out text-white"
-                : ""
-            }`}
-          >
-            Current
-          </button>
-          <button
-            onClick={() => setActiveTab("Finished")}
-            className={`card stats shadow rounded-box join-item grid h-10 flex-grow place-items-center dark:text-slate-300 ${
-              activeTab === "Finished"
-                ? "bg-blue-700 transition delay-100 duration-300 ease-in-out text-white"
-                : ""
-            }`}
-          >
-            Finished
-          </button>
-          <button
-            onClick={() => setActiveTab("Upcoming")}
-            className={`card stats shadow rounded-box join-item grid h-10 flex-grow place-items-center dark:text-slate-300 ${
-              activeTab === "Upcoming"
-                ? "bg-blue-700 transition delay-100 duration-300 ease-in-out text-white"
-                : ""
-            }`}
-          >
-            Upcoming
-          </button>
-        </div>
-
+        <FilterButtons
+          setActiveTab={setActiveTab}
+          activeTab={activeTab}
+          tabList={tabList}
+        />
         <div className="mt-4">
           <DriveList data={drives} />
         </div>
