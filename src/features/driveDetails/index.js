@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { getDrives } from '../../features/dashboard/components/drivesAPI';
 import { useNavigate } from 'react-router-dom';
 import DriveDetailsSkeleton from './components/DriveDetailsSkeleton';
 
+
 function Details({ id }) {
   const [loading, setLoading] = useState(true);
   const [drive, setDrive] = useState(null);
-
   const navigate = useNavigate();
+  
   useEffect(() => {
     
-    const fetchDrives = async () => {
+    const fetchDrives =async () => {
       const drives = await getDrives(); // Fetch all drives
       const selectedDrive = drives.find(drive => drive.id === Number(id)); // Find the drive by ID
       setDrive(selectedDrive);
