@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPageTitle } from '../redux/headerSlice'
-import Dashboard from '../features/Dashboard/DashboardPage'
+import { setPageTitle } from '../../redux/headerSlice'
+import EducationDetail from '../../features/Profile/educationDetail'
 
 function InternalPage(){
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Dashboard"}))
+        dispatch(setPageTitle({ title : "Profile"}))
       }, [])
 
 
     return(
-        <Dashboard />
+        <EducationDetail />
     )
 }
 
