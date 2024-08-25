@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "./DriveCard";
 import { useNavigate } from 'react-router-dom';
+import DriveCardSkeleton from "./DriveCardSkeleton";
 
 const DriveList = ({ data }) => {
   const [loading, setLoading] = useState(true);
-
-
   const navigate = useNavigate();
+
   useEffect(() => {
     setLoading(true);
     // Simulate fetch time
@@ -15,7 +15,6 @@ const DriveList = ({ data }) => {
     }, 1000);
   }, []);
 
-
   const handleonClick = (drive) => {
     navigate(`/app/drive-details/${drive.id}`);
   };
@@ -23,10 +22,14 @@ const DriveList = ({ data }) => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">DriveList Placement Drives</h2>
-      
+
       {loading ? (
-        <div className="animate-pulse">
-          <div className="h-20 bg-gray-400 dark:bg-gray-700 rounded-lg"></div>
+        // Render skeletons while loading
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Show skeletons for each drive card */}
+          {[1, 2, 3].map((_, index) => (
+            <DriveCardSkeleton key={index} />
+          ))}
         </div>
       ) : data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
