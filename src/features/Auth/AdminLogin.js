@@ -33,8 +33,6 @@ function AdminLogin() {
     else {
       setLoading(true);
       // Call API to check user credentials and save token in localstorage
-      setLoading(true);
-      // Call API to check user credentials and save token in localstorage
       const response = await adminLogin(loginObj.email, loginObj.password);
       if (response.status) {
         setLoginObj(INITIAL_LOGIN_OBJ);
@@ -49,7 +47,6 @@ function AdminLogin() {
           showNotification({ message: `${response.message}`, status: 0 })
         );
       }
-      console.log(loginObj)
       setLoginObj(INITIAL_LOGIN_OBJ)
     }
   };
