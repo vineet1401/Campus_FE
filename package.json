@@ -1,5 +1,5 @@
 {
-  "name": "admin-dashboard-template-dashwind",
+  "name": "campus connect",
   "version": "1.0.0",
   "description": "Admin Dashboard template built with create-react-app, tailwind css and daisy UI. Template uses rich tailwind css utility classes and have components of daisy UI, also have redux toolkit implemented for store management.",
   "scripts": {
@@ -19,10 +19,12 @@
     "capitalize-the-first-letter": "^1.0.8",
     "chart.js": "^4.0.1",
     "dayjs": "^1.11.7",
+    "jwt-decode": "^4.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-loader-spinner": "^6.1.6",
     "react-notifications": "^1.7.4",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",

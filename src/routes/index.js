@@ -1,122 +1,116 @@
-// All components mapping with path for internal routes
+// All components <mapping/> with path for internal routes
 
-import { compose } from "@reduxjs/toolkit";
 import { lazy } from "react";
+import { Admin, Alumni, Student } from "../app/rbacAuth";
 
-const CreateDrive = lazy(() => import('../pages/CreateDrive'))
+// Pages for dashboard
 const Dashboard = lazy(() => import("../pages/Dashboard"));
+
+// Pages for Drive
+const CreateDrive = lazy(() => import("../pages/Drive/CreateDrive"));
+const DrivePage = lazy(() => import("../pages/Drive/DrivePage"));
+const DriveDetails = lazy(() => import("../pages/Drive/DriveDetails"));
+
+// Pages for Notice
+const ViewNotice = lazy(() => import("../pages/Notice/ViewNotice"));
+const AddNotice = lazy(() => import("../pages/Notice/AddNotice"));
+
+// Pages for Feedback
+const FeedbackCards = lazy(() => import("../pages/Drive/AppliedDrive"));
+const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
+
+// Pages for Profile
+const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
+const EducationDetail = lazy(() => import("../pages/Profile/EducationProfile"));
+const ExperienceDetail = lazy(() =>
+  import("../pages/Profile/ExperienceProfile")
+);
+const ProjectDetail = lazy(() => import("../pages/Profile/ProjectProfile"));
+
 const Welcome = lazy(() => import("../pages/Welcome"));
 const Page404 = lazy(() => import("../pages/404"));
-const Blank = lazy(() => import("../pages/Blank"));
-const Charts = lazy(() => import("../pages/Charts"));
-const Leads = lazy(() => import("../pages/Leads"));
-const Calendar = lazy(() => import("../pages/Calendar"));
-const Team = lazy(() => import("../pages/Team"));
-const Transactions = lazy(() => import("../pages/Transactions"));
-const Bills = lazy(() => import("../pages/Bills"));
-const PersonalDetail = lazy(() => import("../pages/PersonalProfile"));
-const EducationDetail = lazy(() => import("../pages/EducationProfile"));
-const ProfessionalDetail = lazy(() => import("../pages/ProfessionalProfile"));
-const ProjectDetail = lazy(() => import("../pages/ProjectProfile"));
-const Feedback = lazy(() => import("../pages/Feedback"));
-const DocFeatures = lazy(() => import("../pages/DocFeatures"));
-const DocComponents = lazy(() => import("../pages/DocComponents"));
-const ViewFeedback = lazy(()=> import("../features/documentation/ViewFeedback"))
-const Feedbackform = lazy(()=> import("../pages/Feedback")) ;
-const NoticeBoard = lazy(()=> import("../pages/NoticBoard")) ;
-
-const AddNotice = lazy(()=> import("../pages/AddNotice")) ;
-
-
-
 
 const routes = [
-
-  {
-    path: "notice-board", // the url
-    component: NoticeBoard, // view rendered
-  },
-  {
-    path:"add-notice",
-    component:AddNotice
-    
-  },
   {
     path: "dashboard", // the url
-    component: Dashboard, // view rendered
+    component: <Dashboard />, // view rendered
   },
   {
-    path: 'create-drive',
-    component : CreateDrive,
+    path: "view-notice", // the url
+    component: <ViewNotice />, // view rendered
+  },
+  {
+    path: "add-notice",
+    component: (
+      <Admin>
+        <AddNotice />
+      </Admin>
+    ),
+  },
+  {
+    path: "view-drive", // the url
+    component: <DrivePage />, // view rendered
+  },
+  {
+    path: "create-drive",
+    component: (
+      <Admin>
+        <CreateDrive />
+      </Admin>
+    ),
   },
   {
     path: "welcome", // the url
-    component: Welcome, // view rendered
-  },
-  {
-    path: "leads",
-    component: Leads,
-  },
-  {
-    path: "settings-team",
-    component: Team,
-  },
-  {
-    path: "calendar",
-    component: Calendar,
-  },
-  {
-    path: "transactions",
-    component: Transactions,
+    component: <Welcome />, // view rendered
   },
   {
     path: "profile-personal",
-    component: PersonalDetail,
+    component: (
+      <Student>
+        <PersonalDetail />
+      </Student>
+    ),
   },
   {
     path: "profile-education",
-    component: EducationDetail,
+    component: (
+      <Student>
+        <EducationDetail />
+      </Student>
+    ),
   },
   {
     path: "profile-professional",
-    component: ProfessionalDetail,
+    component: (
+      <Student>
+        <ExperienceDetail />
+      </Student>
+    ),
   },
   {
     path: "profile-project",
-    component: ProjectDetail,
+    component: (
+      <Student>
+        <ProjectDetail />
+      </Student>
+    ),
   },
 
   {
-    path: "settings-billing",
-    component: Bills,
+    path: "drive-details/:id",
+    component: <DriveDetails />,
   },
   {
     path: "feedback",
-    component: Feedback,
-  },
-  {
-    path: "features",
-    component: DocFeatures,
-  },
-  {
-    path: "components",
-    component: DocComponents,
-  },
-  {
-    path: "charts",
-    component: Charts,
+    component: <FeedbackCards />,
   },
   {
     path: "404",
-    component: Page404,
+    component: <Page404 />,
   },
   {
-    path: "blank",
-    component: Blank,
-  },
-  {
-    path: "view",
-    component: ViewFeedback,
+    path: "view-feedback",
+    component: <ViewFeedback />,
   },
 ];
 
