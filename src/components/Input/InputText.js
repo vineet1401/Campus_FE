@@ -8,8 +8,8 @@ const InputText = ({
   defaultValue,
   placeholder,
   updateFormValue,
-  updateType,
   name,
+  readOnly,
 }) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "");
 
@@ -28,10 +28,11 @@ const InputText = ({
       <input
         type={type || "text"}
         value={defaultValue}
+        readOnly={readOnly || false}
         placeholder={placeholder || ""}
         name={name}
         onChange={(e) => updateInputValue(e.target.name, e.target.value)}
-        className="input  input-bordered w-full border-2 border-gray-400 focus:border-gray-700"
+        className="input input-bordered w-full border-2 border-gray-400 focus:border-gray-700"
       />
     </div>
   );
