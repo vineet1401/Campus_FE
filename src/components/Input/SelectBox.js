@@ -12,15 +12,15 @@ function SelectBox(props) {
     placeholder,
     labelStyle,
     options,
-    updateType,
+    readOnly,
     updateFormValue,
+    name
   } = props;
   
-  const [value, setValue] = useState(defaultValue || "");
-
-  const updateValue = (newValue) => {
-    setValue(newValue); // Update local state
-    updateFormValue(newValue); // Call the update function passed as prop
+  const [value, setValue] = useState(defaultValue ? defaultValue : "");
+  const updateInputValue = (name, value) => {
+    setValue(value);
+    updateFormValue({ name, value });
   };
 
   return (
@@ -38,8 +38,11 @@ function SelectBox(props) {
 
       <select
         className="select select-bordered w-full border-2 border-gray-400 focus:border-gray-700"
-        value={value}
-        onChange={(e) => updateValue(e.target.value)}
+        value={defaultValue}
+        readOnly={readOnly || false}
+        placeholder={placeholder || ""}
+        name={name}
+        onChange={(e) => updateInputValue(e.target.name, e.target.value)}
       >
         <option aria-readonly value="PLACEHOLDER">
           {placeholder}
