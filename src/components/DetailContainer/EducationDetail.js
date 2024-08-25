@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../redux/headerSlice";
-import InputText from "../Input/InputText";
-import TextAreaInput from "../Input/TextAreaInput";
-import SelectBox from "../Input/SelectBox";
-import UniversalModal from "../modals/UniversalModal";
 import EducationEditForm from "../EditFormLayout/EducationEditForm";
 
 const EducationDetail = ({ education, deleteEducation, isEditable }) => {
