@@ -29,19 +29,16 @@ function AddNotificationForm() {
           <InputText
             labelTitle="Notification Title"
             placeholder="Notification Title"
-            defaultValue=""
             updateFormValue={updateFormValue}
           />
           <InputText
             type='date'
             labelTitle="Date"
-            defaultValue=""
             updateFormValue={updateFormValue}
           />
           <SelectBox
             labelTitle="Notification Type"
             placeholder="Notification Type"
-            defaultValue="Select Type"
             options={NOTIFICATION_TYPES}
             updateFormValue={updateFormValue}
           />
@@ -49,7 +46,6 @@ function AddNotificationForm() {
             labelTitle="Description"
             placeholder="Description"
             containerStyle={"col-span-2"}
-            defaultValue=""
             updateFormValue={updateFormValue}
           />
         </div>
