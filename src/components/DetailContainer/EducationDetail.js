@@ -1,23 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showNotification } from "../../redux/headerSlice";
-import InputText from "../Input/InputText";
-import TextAreaInput from "../Input/TextAreaInput";
-import SelectBox from "../Input/SelectBox";
-import UniversalModal from "../modals/UniversalModal";
-import EducationEditForm from "../EditFormLayout/EducationEditForm";
 
-const EducationDetail = ({ education, deleteEducation, isEditable }) => {
-  const dispatch = useDispatch();
+const EducationDetail = ({
+  education,
+  deleteEducation,
+  editEducation,
+  isEditable,
+}) => {
 
-  const [educationData, setEducationData] = useState(education);
-
-  const updateProfile = () => {
-    dispatch(showNotification({ message: "Profile Updated", status: 1 }));
-  };
-
-  const updateFormValue = ({ name, value }) => {
-    setEducationData((prev) => ({ ...prev, [name]: value }));
+  const EditForm = () => {
+    editEducation();
+    document.getElementById("EducationFormModal").showModal();
   };
 
   return (
@@ -40,10 +34,11 @@ const EducationDetail = ({ education, deleteEducation, isEditable }) => {
             </p>
             <p className="my-1">
               <span className="font-bold">Start Date:</span>{" "}
-              {education?.startDate}
+              {education?.startDate.substring(0, 10)}
             </p>
             <p className="my-1">
-              <span className="font-bold">End Date:</span> {education?.endDate}
+              <span className="font-bold">End Date:</span>{" "}
+              {education?.endDate.substring(0, 10)}
             </p>
             <p className="my-1">
               <span className="font-bold">Address:</span> {education?.address}
@@ -53,19 +48,16 @@ const EducationDetail = ({ education, deleteEducation, isEditable }) => {
           <div className="mb-2">
             <h4 className="font-bold">Key Acheivements:</h4>
             <ul className="list-disc pl-5">
-              {/* {skillsGained.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))} */}
-              <li>{education?.acheivements}</li>
+              {education?.achievements.map((achievement, index) => (
+                <li key={index}>{achievement}</li>
+              ))}
             </ul>
           </div>
 
           {isEditable && (
             <div className="card-actions justify-end">
               <button
-                onClick={() =>
-                  document.getElementById("educationFormModal").showModal()
-                }
+                onClick={EditForm}
                 className="btn btn-neutral"
               >
                 Edit
@@ -78,12 +70,6 @@ const EducationDetail = ({ education, deleteEducation, isEditable }) => {
         </div>
       </div>
       {/* </div> */}
-
-      <EducationEditForm
-        updateFormValue={updateFormValue}
-        updateProfile={updateProfile}
-        educationData={educationData}
-      />
     </>
   );
 };
