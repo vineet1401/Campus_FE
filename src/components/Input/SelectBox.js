@@ -12,20 +12,20 @@ function SelectBox(props) {
     placeholder,
     labelStyle,
     options,
-    updateType,
+    readOnly,
     updateFormValue,
+    name
   } = props;
-
-  const [value, setValue] = useState(defaultValue || "");
-
-  const updateValue = (newValue) => {
-    updateFormValue({ updateType, value: newValue });
-    setValue(newValue);
+  
+  const [value, setValue] = useState(defaultValue ? defaultValue : "");
+  const updateInputValue = (name, value) => {
+    setValue(value);
+    updateFormValue({ name, value });
   };
 
   return (
     <div className={`inline-block ${containerStyle}`}>
-      <label className={`label  ${labelStyle}`}>
+      <label className={`label ${labelStyle}`}>
         <div className="label-text">
           {labelTitle}
           {labelDescription && (
@@ -38,19 +38,20 @@ function SelectBox(props) {
 
       <select
         className="select select-bordered w-full border-2 border-gray-400 focus:border-gray-700"
-        value={value}
-        onChange={(e) => updateValue(e.target.value)}
+        value={defaultValue}
+        readOnly={readOnly || false}
+        placeholder={placeholder || ""}
+        name={name}
+        onChange={(e) => updateInputValue(e.target.name, e.target.value)}
       >
         <option aria-readonly value="PLACEHOLDER">
           {placeholder}
         </option>
-        {options.map((o, k) => {
-          return (
-            <option value={o.value || o.name} key={k}>
-              {o.name}
-            </option>
-          );
-        })}
+        {options.map((o, k) => (
+          <option value={o.value || o.name} key={k}>
+            {o.name}
+          </option>
+        ))}
       </select>
     </div>
   );

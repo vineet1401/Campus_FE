@@ -13,127 +13,86 @@ import CodeBracketIcon from "@heroicons/react/24/outline/CodeBracketIcon";
 import { PlusCircleIcon, WalletIcon } from "@heroicons/react/16/solid";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
+import { getRoleFromToken } from "../app/rbacAuth";
+
 const iconClasses = `h-6 w-6`;
 const submenuIconClasses = `h-5 w-5`;
 
+const role = getRoleFromToken();
+
 const routes = [
-
- 
   {
-    path: "/app/dashboard",
-    icon: <Squares2X2Icon className={iconClasses} />,
-    name: "Dashboard",
-  },
-  {
-    path: "/app/create-drive",
-    icon: <PlusCircleIcon className={iconClasses} />,
-    name: "Create Drive",
-  },
-  {
-    path: "/app/leads", // url
-    icon: <FolderIcon className={iconClasses} />, // icon component
-    name: "Drive", // name that appear in Sidebar
-  },
-  {
-    path: "/app/transactions", // url
-    icon: <PlusIcon className={iconClasses} />, // icon component
-    name: "new drive", // name that appear in Sidebar
-  },
-  {
-    path: "/app/charts", // url
+    path: "/app/dashboard", // url
     icon: <AcademicCapIcon className={iconClasses} />, // icon component
-    name: "Alumani", // name that appear in Sidebar
+    name: "Dashboard", // name that appear in Sidebar
   },
   {
-    path: "/app/notice-board",
-    icon: <Squares2X2Icon className={iconClasses} />,
-    name: "Notice",
-  },
-  // {
-  //   path: "/app/integration", // url
-  //   icon: <BoltIcon className={iconClasses} />, // icon component
-  //   name: "Assesment", // name that appear in Sidebar
-  // },
-  {
-    path: "/app/calendar", // url
-    icon: <CalendarDaysIcon className={iconClasses} />, // icon component
-    name: "Result", // name that appear in Sidebar
-  },
-
-  // {
-  //   path: '', //no url needed as this has submenu
-  //   icon: <DocumentDuplicateIcon className={`${iconClasses} inline` }/>, // icon component
-  //   name: 'Logout', // name that appear in Sidebar
-
-  // //   submenu : [
-  // //     {
-  // //       path: '/login',
-  // //       icon: <ArrowRightOnRectangleIcon className={submenuIconClasses}/>,
-  // //       name: 'Login',
-  // //     },
-  // //     {
-  // //       path: '/register', //url
-  // //       icon: <UserIcon className={submenuIconClasses}/>, // icon component
-  // //       name: 'Register', // name that appear in Sidebar
-  // //     },
-  // //     {
-  // //       path: '/forgot-password',
-  // //       icon: <KeyIcon className={submenuIconClasses}/>,
-  // //       name: 'Forgot Password',
-  // //     },
-  // //     {
-  // //       path: '/app/blank',
-  // //       icon: <DocumentIcon className={submenuIconClasses}/>,
-  // //       name: 'Blank Page',
-  // //     },
-  // //     {
-  // //       path: '/app/404',
-  // //       icon: <ExclamationTriangleIcon className={submenuIconClasses}/>,
-  // //       name: '404',
-  // //     },
-  // //   ]
-  // },
-  {
-    path: "", //no url needed as this has submenu
-    icon: <UsersIcon className={`${iconClasses} inline`} />, // icon component
-    name: "Edit Profile", // name that appear in Sidebar
+    path: "",
+    icon: <Squares2X2Icon className={`${iconClasses} inline`} />,
+    name: "Drives",
     submenu: [
       {
-        path: "/app/view-details", //url
-        icon: <UserIcon className={submenuIconClasses} />, // icon component
-        name: "View Detail", // name that appear in Sidebar
+        path: "/app/view-drive",
+        icon: <FolderIcon className={iconClasses} />,
+        name: "View Drive",
       },
-      {
-        path: "/app/profile-personal", //url
-        icon: <UserIcon className={submenuIconClasses} />, // icon component
-        name: "Personal Detail", // name that appear in Sidebar
-      },
-      {
-        path: "/app/profile-education", //url
-        icon: <AcademicCapIcon className={submenuIconClasses} />, // icon component
-        name: "Education Detail", // name that appear in Sidebar
-      },
-      {
-        path: "/app/profile-professional", //url
-        icon: <BriefcaseIcon className={submenuIconClasses} />, // icon component
-        name: "Professional Detail", // name that appear in Sidebar
-      },
-      {
-        path: "/app/profile-project", //url
-        icon: <CodeBracketIcon className={submenuIconClasses} />, // icon component
-        name: "Project Detail", // name that appear in Sidebar
-      },
+      ...(role == "Admin"
+        ? [
+            {
+              path: "/app/create-drive",
+              icon: <PlusCircleIcon className={iconClasses} />,
+              name: "Create Drive",
+            },
+          ]
+        : []),
+    ],
+  },
 
-      // {
-      //   path: '/app/settings-billing',
-      //   icon: <WalletIcon className={submenuIconClasses}/>,
-      //   name: 'Billing',
-      // },
-      // {
-      //   path: '/app/settings-team', // url
-      //   icon: <UsersIcon className={submenuIconClasses}/>, // icon component
-      //   name: 'Team Members', // name that appear in Sidebar
-      // },
+  {
+    path: "",
+    icon: <Squares2X2Icon className={`${iconClasses} inline`} />,
+    name: "Alumni",
+    submenu: [
+      {
+        path: "/app/list-alumni",
+        icon: <FolderIcon className={iconClasses} />,
+        name: "View Alumni",
+      },
+      ...(role == "Admin"
+        ? [
+            {
+              path: "/app/add-notice",
+              icon: <PlusCircleIcon className={iconClasses} />,
+              name: "Manage Alumni",
+            },
+          ]
+        : []),
+    ],
+  },
+  {
+    path: "/app/forum", // url
+    icon: <AcademicCapIcon className={iconClasses} />, // icon component
+    name: "Forum", // name that appear in Sidebar
+  },
+  {
+    path: "",
+    icon: <Squares2X2Icon className={`${iconClasses} inline`} />,
+    name: "Notice",
+    submenu: [
+      {
+        path: "/app/view-notice",
+        icon: <FolderIcon className={iconClasses} />,
+        name: "View Notice",
+      },
+      ...(role == "Admin"
+        ? [
+            {
+              path: "/app/add-notice",
+              icon: <PlusCircleIcon className={iconClasses} />,
+              name: "Add Notice",
+            },
+          ]
+        : []),
     ],
   },
 
@@ -142,39 +101,42 @@ const routes = [
     icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
     name: "FeedBack", // name that appear in Sidebar
   },
-  {
-    path: "/app/View", // url
-    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
-    name: "View", // name that appear in Sidebar
-  },
-  {
-    path: "/app/add-notice", // url
-    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
-    name: "Add Notice", // name that appear in Sidebar
-  },
-
-  // {
-  //   path: '', //no url needed as this has submenu
-  //   icon: <DocumentTextIcon className={`${iconClasses} inline` }/>, // icon component
-  //   name: 'Documentation', // name that appear in Sidebar
-  //   submenu : [
-  //     {
-  //       path: '/app/getting-started', // url
-  //       icon: <DocumentTextIcon className={submenuIconClasses}/>, // icon component
-  //       name: 'Getting Started', // name that appear in Sidebar
-  //     },
-  //     {
-  //       path: '/app/features',
-  //       icon: <TableCellsIcon className={submenuIconClasses}/>,
-  //       name: 'Features',
-  //     },
-  //     {
-  //       path: '/app/components',
-  //       icon: <CodeBracketSquareIcon className={submenuIconClasses}/>,
-  //       name: 'Components',
-  //     }
-  //   ]
-  // },
+  ...(role === "Student"
+    ? [
+        {
+          path: "",
+          icon: <UsersIcon className={`${iconClasses} inline`} />,
+          name: "Profile",
+          submenu: [
+            {
+              path: "/app/view-details",
+              icon: <UserIcon className={submenuIconClasses} />,
+              name: "View Detail",
+            },
+            {
+              path: "/app/profile-personal",
+              icon: <UserIcon className={submenuIconClasses} />,
+              name: "Personal Detail",
+            },
+            {
+              path: "/app/profile-education",
+              icon: <AcademicCapIcon className={submenuIconClasses} />,
+              name: "Education Detail",
+            },
+            {
+              path: "/app/profile-professional",
+              icon: <BriefcaseIcon className={submenuIconClasses} />,
+              name: "Professional Detail",
+            },
+            {
+              path: "/app/profile-project",
+              icon: <CodeBracketIcon className={submenuIconClasses} />,
+              name: "Project Detail",
+            },
+          ],
+        },
+      ]
+    : []),
 ];
 
 export default routes;
