@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import DriveList from "../../components/Drive/DriveList";
-import { getDrives } from "./drivesAPI";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../redux/headerSlice";
 import FilterButtons from "../../components/Filter/FilterButtons";
@@ -12,43 +11,63 @@ function DriveHomePage() {
   const tabList = ["Current", "Upcoming", "Finished"];
 
   const [activeTab, setActiveTab] = useState("Current");
-
   const [drives, setDrive] = useState([]);
-
-  const fetchDrive = async () => {
-    const response = await getAllDrives();
-    if (response.status) {
-      dispatch(
-        showNotification({
-          message: `${response.message}`,
-          status: 1,
-        })
-      );
-      setDrive(response.data);
-    } else {
-      dispatch(
-        showNotification({
-          message: `${response.message}`,
-          status: 0,
-        })
-      );
-    }
-  }
-
+  const [filteredDrives, setFilteredDrives] = useState([]);
 
   useEffect(() => {
-    fetchDrive();
-    // Fetch data and filter based on activeTab
-    // const allDrives = await fetchDrive();
-    // console.log(allDrives) // Get the drives data from the drivesAPI.js file
-    // const filteredDrives = allDrives.filter(
-    //   (item) => item.status === activeTab
-    // );
-    // setDrive(filteredDrives);
+    // Fetch drives and filter them based on the active tab
+    const fetchAndFilterDrives = async () => {
+      const response = await getAllDrives();
+
+      if (response.status) {
+        dispatch(
+          showNotification({
+            message: `${response.message}`,
+            status: 1,
+          })
+        );
+
+        const allDrives = response.data;
+        setDrive(allDrives);
+        console.log("Drives Data:", drives);
+
+        // Apply filtering logic immediately after fetching the data
+        const currentDate = new Date();
+        const filtered = allDrives.filter((drive) => {
+          const startDate = new Date(drive.jobInfo.startDate);
+          const endDate = new Date(drive.jobInfo.endDate);
+          console.log("Start Date from API:", drive.startDate);
+          console.log("End Date from API:", drive.endDate);
+          if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+            console.error("Invalid date detected", { startDate, endDate });
+            return false; // Skip invalid dates
+          }
+
+          if (activeTab === "Current") {
+            return startDate <= currentDate && endDate >= currentDate;
+          } else if (activeTab === "Upcoming") {
+            return startDate > currentDate;
+          } else if (activeTab === "Finished") {
+            return endDate < currentDate;
+          }
+          return false;
+        });
+
+        setFilteredDrives(filtered); // Set the filtered drives
+      } else {
+        dispatch(
+          showNotification({
+            message: `${response.message}`,
+            status: 0,
+          })
+        );
+      }
+    };
+
+    fetchAndFilterDrives(); // Fetch and filter drives when component mounts or when activeTab changes
   }, [activeTab]); // Re-run when activeTab changes
 
   const updateDashboardPeriod = (newRange) => {
-    // Dashboard range changed, write code to refresh your values
     dispatch(
       showNotification({
         message: `Period updated to ${newRange.startDate} to ${newRange.endDate}`,
@@ -66,7 +85,7 @@ function DriveHomePage() {
           tabList={tabList}
         />
         <div className="mt-4">
-          <DriveList data={drives} />
+          <DriveList data={filteredDrives} /> {/* Display filtered drives */}
         </div>
       </div>
     </>
