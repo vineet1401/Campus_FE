@@ -8,25 +8,26 @@ const NOTIFICATION_TYPES = [
   { name: "New Company Arrival", value: "arrival" },
 ];
 
-const AddNoticeInputs = ({ updateFormValue }) => {
+
+const AddNoticeInputs = ({ updateFormValue,notification }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <InputText
         labelTitle="Notification Title"
         placeholder="Notification Title"
-        defaultValue=""
+        defaultValue={notification?.title}
         updateFormValue={updateFormValue}
       />
       <InputText
         type="date"
         labelTitle="Date"
-        defaultValue=""
+        defaultValue={notification?.date}
         updateFormValue={updateFormValue}
       />
       <SelectBox
         labelTitle="Notification Type"
         placeholder="Notification Type"
-        defaultValue="Select Type"
+        defaultValue={notification?.type}
         options={NOTIFICATION_TYPES}
         updateFormValue={updateFormValue}
       />
@@ -34,7 +35,7 @@ const AddNoticeInputs = ({ updateFormValue }) => {
         labelTitle="Description"
         placeholder="Description"
         containerStyle={"col-span-2"}
-        defaultValue=""
+        defaultValue={notification?.description}
         updateFormValue={updateFormValue}
       />
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import PieChart from '../Charts/components/PieChart'; // Adjust the path as needed
+import PieChart from '../charts/components/PieChart'; // Adjust the path as needed
 import TitleCard from '../../components/Cards/TitleCard'; // Adjust the path as needed
 import Subtitle from '../../components/Typography/Subtitle'; // Adjust the path as needed
 
