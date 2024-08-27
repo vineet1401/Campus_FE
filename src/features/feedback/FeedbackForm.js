@@ -17,8 +17,7 @@ function FeedbackForm() {
     additionalComments: "",
   });
 
-  const updateFormValue = (e) => {
-    const { name, value } = e.target;
+  const updateFormValue = ({ name, value }) => {
     setFeedback((prev) => ({ ...prev, [name]: value }));
   };
 

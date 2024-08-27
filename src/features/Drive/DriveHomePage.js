@@ -4,6 +4,7 @@ import { getDrives } from "./drivesAPI";
 import { useDispatch } from "react-redux";
 import { showNotification } from "../../redux/headerSlice";
 import FilterButtons from "../../components/Filter/FilterButtons";
+import { getAllDrives } from "../../services/drive.service";
 
 function DriveHomePage() {
   const dispatch = useDispatch();
@@ -11,15 +12,39 @@ function DriveHomePage() {
   const tabList = ["Current", "Upcoming", "Finished"];
 
   const [activeTab, setActiveTab] = useState("Current");
+
   const [drives, setDrive] = useState([]);
 
+  const fetchDrive = async () => {
+    const response = await getAllDrives();
+    if (response.status) {
+      dispatch(
+        showNotification({
+          message: `${response.message}`,
+          status: 1,
+        })
+      );
+      setDrive(response.data);
+    } else {
+      dispatch(
+        showNotification({
+          message: `${response.message}`,
+          status: 0,
+        })
+      );
+    }
+  }
+
+
   useEffect(() => {
+    fetchDrive();
     // Fetch data and filter based on activeTab
-    const allDrives = getDrives(); // Get the drives data from the drivesAPI.js file
-    const filteredDrives = allDrives.filter(
-      (item) => item.status === activeTab
-    );
-    setDrive(filteredDrives);
+    // const allDrives = await fetchDrive();
+    // console.log(allDrives) // Get the drives data from the drivesAPI.js file
+    // const filteredDrives = allDrives.filter(
+    //   (item) => item.status === activeTab
+    // );
+    // setDrive(filteredDrives);
   }, [activeTab]); // Re-run when activeTab changes
 
   const updateDashboardPeriod = (newRange) => {

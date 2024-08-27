@@ -35,10 +35,10 @@ const DriveList = ({ data }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.map((drive) => (
             <div
-              key={drive.id}
+              key={drive._id}
               className="opacity-0 transition-opacity duration-500 ease-in-out delay-100 opacity-100"
             >
-              <Card {...drive} onClick={() => handleonClick(drive)} />
+              <Card drive={drive} onClick={() => handleonClick(drive)} />
             </div>
           ))}
         </div>
