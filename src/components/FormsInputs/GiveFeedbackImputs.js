@@ -19,6 +19,7 @@ const GiveFeedbackImputs = ({feedback, updateFormValue}) => {
       <InputText
         labelTitle="Student Name"
         name="studentName"
+        type="text"
         value={feedback.studentName}
         onChange={updateFormValue}
         containerStyle="w-full"
