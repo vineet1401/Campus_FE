@@ -55,13 +55,11 @@
 
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { showNotification } from "../../redux/headerSlice"; // Adjust path as needed
-import { createFeedback } from "../../services/feedback.service"; // Import your service method
 import GiveFeedbackInputs from "../../components/FormsInputs/GiveFeedbackImputs";
 import UniversalModal from "../../components/modals/UniversalModal";
+import { createFeedback } from "../../services/feedback.service";
 
-const initialObj = {
+const INITIAL_FEEDBACK = {
   studentName: "",
   dateOfJoining: "",
   overallExperience: "",
@@ -69,46 +67,32 @@ const initialObj = {
   supportFromSeniors: "",
   trainingAndDevelopment: "",
   additionalComments: "",
-}
-function FeedbackForm() {
-  const dispatch = useDispatch();
-  const [feedback, setFeedback] = useState(initialObj);
-  const [isLoading, setIsLoading] = useState(false);
+};
 
+function FeedbackPage() {
+  const [feedback, setFeedback] = useState(INITIAL_FEEDBACK);
+
+  // Handle Form Value Updates
   const updateFormValue = (e) => {
     const { name, value } = e.target;
     setFeedback((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Submit Feedback
   const submitFeedback = async () => {
-    setIsLoading(true);
+    console.log("Feedback Data:", feedback);
     try {
       const response = await createFeedback(feedback);
       if (response.status) {
-        dispatch(
-          showNotification({
-            message: "Feedback Submitted Successfully!",
-            status: 1,
-          })
-        );
-        setFeedback(initialObj);
+        alert("Feedback Submitted Successfully!");
+        setFeedback(INITIAL_FEEDBACK);
+        // Optionally close the modal here if needed
+        // Use a mechanism to close the modal here if applicable
       } else {
-        dispatch(
-          showNotification({
-            message: response.message || "Failed to submit feedback.",
-            status: 0,
-          })
-        );
+        alert("Failed to submit feedback: " + response.message);
       }
     } catch (error) {
-      dispatch(
-        showNotification({
-          message: "An error occurred while submitting feedback.",
-          status: 0,
-        })
-      );
-    } finally {
-      setIsLoading(false);
+      alert("Submission failed: " + error.message);
     }
   };
 
@@ -121,15 +105,13 @@ function FeedbackForm() {
       <div className="mt-4">
         <button
           onClick={submitFeedback}
-          disabled={isLoading}
           className="bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 text-sm self-end mt-4 md:mt-0 float-right"
         >
-          {isLoading ? "Submitting..." : "Submit Feedback"}
+          Submit Feedback
         </button>
       </div>
     </UniversalModal>
   );
 }
 
-export default FeedbackForm;
-
+export default FeedbackPage;
