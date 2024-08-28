@@ -26,7 +26,7 @@ const TextAreaInput = ({
         </span>
       </label>
       <textarea
-        value={defaultValue}
+        value={value}
         name={name}
         readOnly={readOnly || false}
         rows={1}

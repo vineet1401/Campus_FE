@@ -38,7 +38,7 @@ function SelectBox(props) {
 
       <select
         className="select select-bordered w-full border-2 border-gray-400 focus:border-gray-700"
-        value={defaultValue}
+        value={value}
         readOnly={readOnly || false}
         placeholder={placeholder || ""}
         name={name}

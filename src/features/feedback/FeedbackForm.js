@@ -55,6 +55,8 @@
 
 
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { showNotification } from "../../redux/headerSlice";
 import GiveFeedbackInputs from "../../components/FormsInputs/GiveFeedbackImputs";
 import UniversalModal from "../../components/modals/UniversalModal";
 import { createFeedback } from "../../services/feedback.service";
@@ -70,31 +72,45 @@ const INITIAL_FEEDBACK = {
 };
 
 function FeedbackPage() {
+  const dispatch = useDispatch();
   const [feedback, setFeedback] = useState(INITIAL_FEEDBACK);
 
+  const updateFeedback = async () => {
+    console.log(feedback)
+
+    if (
+      !feedback.studentName ||
+      !feedback.overallExperience ||
+      !feedback.workEnvironment ||
+      !feedback.supportFromSeniors ||
+      !feedback.trainingAndDevelopment
+    ) {
+      dispatch(showNotification({ message: "Please fill in all required fields.", status: 0 }));
+      return;
+    }
+
+
+   
+    try {
+        const response = await createFeedback(feedback); // Call the API
+        if (response.status) {
+            dispatch(showNotification({ message: "Feedback Added", status: 1 }));
+            setFeedback(INITIAL_FEEDBACK)
+        } else {
+            dispatch(showNotification({ message: response.message, status: 0 }));
+        }
+    } catch (error) {
+        dispatch(showNotification({ message: "Failed to add feedback", status: 0 }));
+    }
+};
+
   // Handle Form Value Updates
-  const updateFormValue = (e) => {
-    const { name, value } = e.target;
+  const updateFormValue = (name, value) => {
+   
     setFeedback((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Submit Feedback
-  const submitFeedback = async () => {
-    console.log("Feedback Data:", feedback);
-    try {
-      const response = await createFeedback(feedback);
-      if (response.status) {
-        alert("Feedback Submitted Successfully!");
-        setFeedback(INITIAL_FEEDBACK);
-        // Optionally close the modal here if needed
-        // Use a mechanism to close the modal here if applicable
-      } else {
-        alert("Failed to submit feedback: " + response.message);
-      }
-    } catch (error) {
-      alert("Submission failed: " + error.message);
-    }
-  };
+  // 
 
   return (
     <UniversalModal id="FeedbackFormModal" title="Give Feedback">
@@ -104,7 +120,7 @@ function FeedbackPage() {
       />
       <div className="mt-4">
         <button
-          onClick={submitFeedback}
+          onClick={updateFeedback}
           className="bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 text-sm self-end mt-4 md:mt-0 float-right"
         >
           Submit Feedback
