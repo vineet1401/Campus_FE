@@ -54,7 +54,7 @@
 
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { showNotification } from "../../redux/headerSlice";
 import GiveFeedbackInputs from "../../components/FormsInputs/GiveFeedbackImputs";
@@ -69,11 +69,17 @@ const INITIAL_FEEDBACK = {
   supportFromSeniors: "",
   trainingAndDevelopment: "",
   additionalComments: "",
+  
 };
 
-function FeedbackPage() {
+function FeedbackForm({driveId}) {
   const dispatch = useDispatch();
   const [feedback, setFeedback] = useState(INITIAL_FEEDBACK);
+
+  useEffect(()=>{
+    setFeedback(prev=>({...prev,driveId}));
+    console.log(driveId,"driveid")
+  },[driveId])
 
   const updateFeedback = async () => {
     console.log(feedback)
@@ -105,7 +111,7 @@ function FeedbackPage() {
 };
 
   // Handle Form Value Updates
-  const updateFormValue = (name, value) => {
+  const updateFormValue = ({name, value}) => {
    
     setFeedback((prev) => ({ ...prev, [name]: value }));
   };
@@ -130,4 +136,4 @@ function FeedbackPage() {
   );
 }
 
-export default FeedbackPage;
+export default FeedbackForm;
