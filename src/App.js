@@ -13,14 +13,16 @@ import initializeApp from "./app/init";
 import routes from "./routes";
 import SuspenseContent from "./components/Loader/SuspenseLoader";
 import { getRoleFromToken } from "./app/rbacAuth";
-import { getStudentById } from "./services/student.service";
 import { useDispatch } from "react-redux";
 import { showNotification } from "./redux/headerSlice";
-import { setPersonalData, setEducation, setExperience } from "./redux/studentDetailSlice";
-import { getAllEducation } from "./services/education.service";
+import { setPersonalData, setEducation, setExperience, setProject } from "./redux/studentDetailSlice";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
+import { getStudentById } from "./services/student.service";
+import { getAllEducation } from "./services/education.service";
 import { getAllExperiences } from "./services/experience.service";
+import { getAllProjects } from "./services/project.service";
 
 // Importing pages
 const Layout = lazy(() => import("./containers/Layout"));
@@ -45,10 +47,11 @@ function App() {
   const fetchData = async () => {
     if (role === "Student" && !dataFetched) {
       try {
-        const [studentPersonal, educationData, experienceData] = await Promise.all([
+        const [studentPersonal, educationData, experienceData, projectData] = await Promise.all([
           getStudentById(),
           getAllEducation(),
           getAllExperiences(),
+          getAllProjects()
         ]);
 
         if (studentPersonal.status) {
@@ -97,6 +100,23 @@ function App() {
           dispatch(
             showNotification({
               message: `${experienceData.message}`,
+              status: 0,
+            })
+          );
+        }
+
+        if (projectData.status) {
+          dispatch(
+            showNotification({
+              message: `${projectData.message}`,
+              status: 1,
+            })
+          );
+          dispatch(setProject(projectData.data));
+        } else {
+          dispatch(
+            showNotification({
+              message: `${projectData.message}`,
               status: 0,
             })
           );

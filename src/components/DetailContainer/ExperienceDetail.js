@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { showNotification } from "../../redux/headerSlice";
-import ExperienceEditForm from "../EditFormLayout/ExperienceEditForm";
 
 function ExperienceDetail({ work, deleteWork, isEditable, editWork }) {
+
   const EditForm = () => {
     editWork();
     document.getElementById("ExperienceFormModal").showModal();
@@ -20,8 +18,12 @@ function ExperienceDetail({ work, deleteWork, isEditable, editWork }) {
 
           <div className="my-1">
             <p>
-              <span className="font-bold">positionTitle:</span>{" "}
+              <span className="font-bold">Position Title:</span>{" "}
               {work?.positionTitle}
+            </p>
+            <p>
+              <span className="font-bold">Job Type:</span>{" "}
+              {work?.jobType}
             </p>
             <p>
               <span className="font-bold">Start Date:</span>{" "}

@@ -43,7 +43,7 @@ const EducationEditForm = ({ educationDataId }) => {
   };
 
   return (
-    <UniversalModal id="educationFormModal" title="Education Detail">
+    <UniversalModal id="EducationFormModal" title="Education Detail">
       <EducationInputs
         educationData={education}
         updateFormValue={updateFormValue}

@@ -30,7 +30,8 @@ function ExperiencePage() {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.studentData.experience);
-
+  
+ console.log(data)
   const [experienceDataId, setExperienceDataId] = useState("");
   const [experience, setExperience] = useState(INITIAL_WORK);
 

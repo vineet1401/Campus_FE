@@ -10,10 +10,12 @@ import { useEffect, useState } from "react";
 const ExperienceEditForm = ({ experienceDataId }) => {
 
   const dispatch = useDispatch();
+
   const experienceData = useSelector(
     (state) => state.studentData.experience
   ).filter((item) => item._id == experienceDataId)[0];
 
+  console.log(experienceData)
   const [experience, setExperience] = useState(experienceData);
 
   useEffect(() => {
