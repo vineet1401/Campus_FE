@@ -29,17 +29,13 @@ function DriveHomePage() {
 
         const allDrives = response.data;
         setDrive(allDrives);
-        console.log("Drives Data:", drives);
 
         // Apply filtering logic immediately after fetching the data
         const currentDate = new Date();
         const filtered = allDrives.filter((drive) => {
-          const startDate = new Date(drive.jobInfo.startDate);
-          const endDate = new Date(drive.jobInfo.endDate);
-          console.log("Start Date from API:", drive.startDate);
-          console.log("End Date from API:", drive.endDate);
+          const startDate = new Date(drive?.jobInfo?.startDate);
+          const endDate = new Date(drive?.jobInfo?.endDate);
           if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-            console.error("Invalid date detected", { startDate, endDate });
             return false; // Skip invalid dates
           }
 

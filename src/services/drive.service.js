@@ -25,6 +25,7 @@ export const createDrive = async (driveData) => {
 export const getAllDrives = async () => {
  try {
    const response = await axios.get("/api/drive/fetch-all-drives");
+   console.log(response.data.data)
    return {
      status: response.data.status,
      message: response.data.message,
