@@ -1,0 +1,21 @@
+const validateCreateDrive = (driveData) => {
+    if (!driveData.jobInfo.companyAddress?.trim()) return false;
+    if (!driveData.jobInfo.companyName?.trim()) return false;
+    if (!driveData.jobInfo.driveDate?.trim()) return false;
+    if (!driveData.jobInfo.endDate?.trim()) return false;
+    if (!driveData.jobInfo.imageUrl?.trim()) return false;
+    if (!driveData.jobInfo.jobDescription?.trim()) return false;
+    if (!driveData.jobInfo.jobDesignation?.trim()) return false;
+    if (!driveData.jobInfo.jobLocation?.trim()) return false;
+    if (!driveData.jobInfo.jobSalary?.trim()) return false;
+    if (!driveData.jobInfo.maxBacklog?.trim()) return false;
+    if (!driveData.jobInfo.program?.trim()) return false;
+    if (!driveData.jobInfo.startDate?.trim()) return false;
+    if (!driveData.jobInfo.stream?.trim()) return false;
+    if (!driveData.jobInfo.throughoutPercentage?.trim()) return false;
+    if (!driveData.jobInfo.tnpCordinatorDept?.trim()) return false;
+    if (!driveData.jobInfo.tnpCordinatorEmail?.trim()) return false;
+    if (!driveData.jobInfo.tnpCordinatorName?.trim()) return false;
+    if (!driveData.jobInfo.tnpCordinatorNumber?.trim()) return false;
+    return true;
+};

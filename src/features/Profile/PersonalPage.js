@@ -85,8 +85,8 @@ function PersonalPage() {
 
   return (
     <>
-      <TitleCard title="Personal Detail" topMargin="mt-2">
-        <h4 className="font-semibold">PERSONAL DETAILS</h4>
+      <TitleCard title="Personal? Detail" topMargin="mt-2">
+        <h4 className="font-semibold">PERSONAL? DETAILS</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputText
             labelTitle="First Name"
@@ -94,7 +94,7 @@ function PersonalPage() {
             placeholder="First Name"
             updateFormValue={updateFormValue}
             name="firstName"
-            defaultValue={personal.firstName}
+            defaultValue={personal?.firstName}
           />
           <InputText
             labelTitle="Middle Name"
@@ -102,7 +102,7 @@ function PersonalPage() {
             placeholder="Middle Name"
             updateFormValue={updateFormValue}
             name="middleName"
-            defaultValue={personal.middleName}
+            defaultValue={personal?.middleName}
           />
           <InputText
             labelTitle="Last Name"
@@ -110,7 +110,7 @@ function PersonalPage() {
             placeholder="Last Name"
             updateFormValue={updateFormValue}
             name="lastName"
-            defaultValue={personal.lastName}
+            defaultValue={personal?.lastName}
           />
           <InputText
             labelTitle="Email Id"
@@ -119,7 +119,7 @@ function PersonalPage() {
             updateFormValue={updateFormValue}
             name="email"
             type="email"
-            defaultValue={personal.email}
+            defaultValue={personal?.email}
           />
           <InputText
             labelTitle="Phone Number"
@@ -127,7 +127,7 @@ function PersonalPage() {
             placeholder="Phone Number"
             updateFormValue={updateFormValue}
             name="phoneNumber"
-            defaultValue={personal.phoneNumber}
+            defaultValue={personal?.phoneNumber}
           />
           <SelectBox
             labelTitle="Gender"
@@ -136,7 +136,7 @@ function PersonalPage() {
             options={GENDER}
             name="gender"
             updateFormValue={updateFormValue}
-            defaultValue={personal.gender}
+            defaultValue={personal?.gender}
           />
           <InputText
             type={"date"}
@@ -144,7 +144,7 @@ function PersonalPage() {
             labelTitle={"Date of Birth"}
             readOnly={!isEditing}
             name="dateOfBirth"
-            defaultValue={personal.dateOfBirth.substring(0, 10)}
+            defaultValue={personal?.dateOfBirth?.substring(0, 10)}
           />
           <TextAreaInput
             labelTitle="About"
@@ -153,7 +153,7 @@ function PersonalPage() {
             containerStyle={"col-span-2"}
             updateFormValue={updateFormValue}
             name="about"
-            defaultValue={personal.about}
+            defaultValue={personal?.about}
           />
         </div>
 
@@ -167,7 +167,7 @@ function PersonalPage() {
             placeholder="Street"
             updateFormValue={updateFormValue}
             name="address.street"
-            defaultValue={personal.address.street}
+            defaultValue={personal?.address.street}
           />
           <InputText
             labelTitle="City"
@@ -175,7 +175,7 @@ function PersonalPage() {
             placeholder="City"
             updateFormValue={updateFormValue}
             name="address.city"
-            defaultValue={personal.address.city}
+            defaultValue={personal?.address.city}
           />
           <InputText
             labelTitle="State"
@@ -183,7 +183,7 @@ function PersonalPage() {
             placeholder="State"
             updateFormValue={updateFormValue}
             name="address.state"
-            defaultValue={personal.address.state}
+            defaultValue={personal?.address.state}
           />
           <InputText
             labelTitle="Postal Code"
@@ -191,7 +191,7 @@ function PersonalPage() {
             placeholder="Postal Code"
             updateFormValue={updateFormValue}
             name="address.postalCode"
-            defaultValue={personal.address.postalCode}
+            defaultValue={personal?.address.postalCode}
           />
           <InputText
             labelTitle="Country"
@@ -199,7 +199,7 @@ function PersonalPage() {
             placeholder="Country"
             updateFormValue={updateFormValue}
             name="address.country"
-            defaultValue={personal.address.country}
+            defaultValue={personal?.address.country}
           />
         </div>
 
@@ -213,7 +213,7 @@ function PersonalPage() {
             placeholder="Name"
             updateFormValue={updateFormValue}
             name="emergencyContact.name"
-            defaultValue={personal.emergencyContact.name}
+            defaultValue={personal?.emergencyContact.name}
           />
           <InputText
             labelTitle="Relation"
@@ -221,7 +221,7 @@ function PersonalPage() {
             placeholder="Relation"
             updateFormValue={updateFormValue}
             name="emergencyContact.relationship"
-            defaultValue={personal.emergencyContact.relationship}
+            defaultValue={personal?.emergencyContact.relationship}
           />
           <InputText
             labelTitle="Contact Number"
@@ -229,7 +229,7 @@ function PersonalPage() {
             placeholder="Contact Number"
             updateFormValue={updateFormValue}
             name="emergencyContact.phoneNumber"
-            defaultValue={personal.emergencyContact.phoneNumber}
+            defaultValue={personal?.emergencyContact.phoneNumber}
           />
         </div>
 

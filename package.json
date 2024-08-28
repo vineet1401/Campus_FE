@@ -32,6 +32,7 @@
     "react-tailwindcss-datepicker": "^1.6.0",
     "react-toastify": "^10.0.5",
     "theme-change": "^2.2.0",
+    "toast": "^0.5.4",
     "web-vitals": "^2.1.4"
   },
   "repository": {
