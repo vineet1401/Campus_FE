@@ -1,5 +1,3 @@
-// import axios from 'axios'
-// import capitalize from 'capitalize-the-first-letter'
 import React, { useState, useEffect } from "react";
 import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 
@@ -7,7 +5,6 @@ function SelectBox(props) {
   const {
     labelTitle,
     labelDescription,
-    defaultValue,
     containerStyle,
     placeholder,
     labelStyle,
@@ -16,12 +13,20 @@ function SelectBox(props) {
     updateFormValue,
     name
   } = props;
-  
-  const [value, setValue] = useState(defaultValue ? defaultValue : "");
+
+  const [selectedValue, setSelectedValue] = useState(""); // Manage value using state
+
   const updateInputValue = (name, value) => {
-    setValue(value);
-    updateFormValue({ name, value });
+    setSelectedValue(value); // Update local state
+    updateFormValue({ name, value }); // Pass updated value to parent
   };
+
+  useEffect(() => {
+    // If defaultValue exists, set it as selected
+    if (props.defaultValue) {
+      setSelectedValue(props.defaultValue);
+    }
+  }, [props.defaultValue]);
 
   return (
     <div className={`inline-block ${containerStyle}`}>
@@ -38,15 +43,12 @@ function SelectBox(props) {
 
       <select
         className="select select-bordered w-full border-2 border-gray-400 focus:border-gray-700"
-        value={value}
+        value={selectedValue} // Bind to state
         readOnly={readOnly || false}
-        placeholder={placeholder || ""}
         name={name}
         onChange={(e) => updateInputValue(e.target.name, e.target.value)}
       >
-        <option aria-readonly value="PLACEHOLDER">
-          {placeholder}
-        </option>
+        <option value="" disabled>{placeholder}</option> {/* Placeholder */}
         {options.map((o, k) => (
           <option value={o.value || o.name} key={k}>
             {o.name}

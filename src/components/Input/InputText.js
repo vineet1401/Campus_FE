@@ -14,6 +14,8 @@ const InputText = ({
 }) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "");
 
+  
+
   const updateInputValue = (name, value) => {
     setValue(value);
     updateFormValue({ name, value });

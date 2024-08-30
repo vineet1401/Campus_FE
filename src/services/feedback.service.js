@@ -23,25 +23,36 @@ export const createFeedback = async (feedbackData) => {
 
 
 // Get all feedback records
-export const getAllFeedback = async () => {
-    try {
-      const response = await axios.get("/api/feedback/fetch-all-feedback");
-      return {
-        status: response.data.status,
-        message: response.data.message,
-        data: response.data.data,
-      };
-    } catch (error) {
-      console.error("Fetch all feedback records failed:", error);
-      return {
-        status: error.response ? error.response.data.status : false,
-        message: error.response
-          ? error.response.data.message
-          : "Failed to fetch feedback records",
-        data: null,
-      };
-    }
-  };
+
+
+export const getCompanyFeedback = async (companyName) => {
+  try {
+    // Make GET request with companyName as a query parameter
+    const response = await axios.get('/api/feedback/fetch-all-feedback', {
+      params: { companyName : companyName.toLowerCase()} // Send companyName as a query parameter
+      
+    });
+
+    // Return the data with status and message from the response
+    return {
+      status: response.status, // Adjusted to use HTTP status code from the response
+      message: response.data.message,
+      data: response.data.data,
+    };
+  } catch (error) {
+    console.error("Fetch all feedback records failed:", error);
+
+    // Handle error response if available
+    return {
+      status: error.response ? error.response.status : false,
+      message: error.response
+        ? error.response.data.message
+        : "Failed to fetch feedback records",
+      data: null,
+    };
+  }
+};
+
 
 
 

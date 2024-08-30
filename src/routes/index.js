@@ -109,7 +109,7 @@ const routes = [
     component: <Page404 />,
   },
   {
-    path: "view-feedback",
+    path: "view-feedback/:companyName",
     component: <ViewFeedback />,
   },
 ];

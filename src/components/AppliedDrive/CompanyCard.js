@@ -1,10 +1,11 @@
 import React from "react";
 
-const CompanyCard = ({ drive, setDriveId}) => {
+const CompanyCard = ({ drive, setDriveId,setCompanyName}) => {
 
 
   const handleGiveFeedback =()=>{
     setDriveId(drive._id)
+    setCompanyName(drive.jobInfo.companyName)
     document.getElementById("FeedbackFormModal").showModal()
 
   }
