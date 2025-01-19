@@ -5,6 +5,7 @@ import FeedbackForm from "./FeedbackForm";
 import { getAllDrives } from "../../services/drive.service";
 import { showNotification } from "../../../src/redux/headerSlice"; // Adjust import as needed
 
+
 function AppliedDrivesList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drives, setDrives] = useState([]);
@@ -12,8 +13,8 @@ function AppliedDrivesList() {
   const [companyName,setCompanyName] = useState("");
   const dispatch = useDispatch();
 
-
   
+
 
   // Fetch drives on component mount
   useEffect(() => {
@@ -51,7 +52,7 @@ function AppliedDrivesList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-3 p-4 border-c">
       {drives.map((drive) => (
-        <CompanyCard key={drive._id} drive={drive} setDriveId={setDriveId} setCompanyName={setCompanyName}/>
+        <CompanyCard key={drive._id} drive={drive} setDriveId={setDriveId} setCompanyName={setCompanyName} />
       ))}
       <FeedbackForm driveId={driveId} companyName={companyName}/>
     </div>

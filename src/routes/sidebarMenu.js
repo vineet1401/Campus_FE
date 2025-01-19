@@ -101,8 +101,28 @@ const routes = [
     icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
     name: "FeedBack", // name that appear in Sidebar
   },
+
+  
   ...(role === "Student"
     ? [
+        {
+          path: "", // url
+          icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+          name: "Learning", // name that appear in Sidebar
+          submenu: [
+            {
+              path:"/app/dsa",
+              icon: <DocumentTextIcon className={submenuIconClasses} />,
+              name: "DSA",
+            },
+            {
+              path:"",
+              icon: <DocumentTextIcon className={submenuIconClasses} />,
+              name: "Aptitude",
+            },
+          ]
+          
+        },
         {
           path: "",
           icon: <UsersIcon className={`${iconClasses} inline`} />,
@@ -133,6 +153,7 @@ const routes = [
               icon: <CodeBracketIcon className={submenuIconClasses} />,
               name: "Project Detail",
             },
+            
           ],
         },
       ]

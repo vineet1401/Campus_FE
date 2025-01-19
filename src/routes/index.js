@@ -19,6 +19,10 @@ const AddNotice = lazy(() => import("../pages/Notice/AddNotice"));
 const FeedbackCards = lazy(() => import("../pages/Drive/AppliedDrive"));
 const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
 
+// Pages for Learning
+
+const DSA = lazy(() => import("../pages/Learning/Coding"));
+
 // Pages for Profile
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/Profile/EducationProfile"));
@@ -102,7 +106,12 @@ const routes = [
   },
   {
     path: "feedback",
-    component: <FeedbackCards />,
+    component: 
+    <FeedbackCards />,
+  },
+  {
+    path:"dsa",
+    component: <DSA />
   },
   {
     path: "404",
@@ -112,6 +121,10 @@ const routes = [
     path: "view-feedback/:companyName",
     component: <ViewFeedback />,
   },
+//  {
+//   path:"/coding",
+//   component: <Coding />
+//  } 
 ];
 
 export default routes;

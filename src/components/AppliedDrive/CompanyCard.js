@@ -1,6 +1,9 @@
 import React from "react";
+import { useState,useEffect } from "react";
+import { getCompanyFeedback } from "../../services/feedback.service";
 
 const CompanyCard = ({ drive, setDriveId,setCompanyName}) => {
+
 
 
   const handleGiveFeedback =()=>{
@@ -9,6 +12,11 @@ const CompanyCard = ({ drive, setDriveId,setCompanyName}) => {
     document.getElementById("FeedbackFormModal").showModal()
 
   }
+
+
+
+
+
   return (
     <div
       key={drive?.jobInfo?._id}
@@ -40,14 +48,12 @@ const CompanyCard = ({ drive, setDriveId,setCompanyName}) => {
           </p>
 
           <button
-            // onClick={() =>
-              
-            // }
             onClick={handleGiveFeedback}
-            className="bg-gray-500 text-white hover:bg-gray-600 p-2 font-semibold text-sm w-max rounded-md"
-          >
+            className="bg-gray-500 text-white hover:bg-gray-600 p-2 font-semibold text-sm w-max rounded-md">
             Give Feedback
           </button>
+
+
         </div>
       </div>
     </div>
