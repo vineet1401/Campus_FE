@@ -9,11 +9,11 @@ import { showNotification } from "../../../src/redux/headerSlice"; // Adjust imp
 function AppliedDrivesList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drives, setDrives] = useState([]);
-  const [driveId,setDriveId] = useState("");
-  const [companyName,setCompanyName] = useState("");
+  const [driveId, setDriveId] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const dispatch = useDispatch();
 
-  
+
 
 
   // Fetch drives on component mount
@@ -54,7 +54,7 @@ function AppliedDrivesList() {
       {drives.map((drive) => (
         <CompanyCard key={drive._id} drive={drive} setDriveId={setDriveId} setCompanyName={setCompanyName} />
       ))}
-      <FeedbackForm driveId={driveId} companyName={companyName}/>
+      <FeedbackForm driveId={driveId} companyName={companyName} />
     </div>
   );
 }
