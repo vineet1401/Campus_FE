@@ -22,7 +22,7 @@ function AddNotificationForm() {
   return (
     <>
       <TitleCard title="Add Notification" topMargin="mt-2">
-        <AddNoticeInputs />
+        <AddNoticeInputs updateFormValue={updateFormValue} />
         <div className="mt-16">
           <button
             className="btn btn-primary float-right"

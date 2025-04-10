@@ -1,10 +1,11 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useState,useEffect } from "react";
 
 const InputText = ({
   labelTitle,
   labelStyle,
   type,
   containerStyle,
+  // value,
   defaultValue,
   placeholder,
   updateFormValue,
@@ -12,6 +13,8 @@ const InputText = ({
   readOnly,
 }) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "");
+
+  
 
   const updateInputValue = (name, value) => {
     setValue(value);
@@ -27,7 +30,7 @@ const InputText = ({
       </label>
       <input
         type={type || "text"}
-        value={defaultValue}
+        value={value}
         readOnly={readOnly || false}
         placeholder={placeholder || ""}
         name={name}
@@ -39,3 +42,6 @@ const InputText = ({
 };
 
 export default InputText;
+
+
+
