@@ -1,62 +1,96 @@
 import React from "react";
-import PieChart from '../../features/Charts/components/PieChart'; // Adjust the path as needed
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import PieChart from '../../features/charts/components/PieChart'; // Adjust the path as needed
 import TitleCard from '../../components/Cards/TitleCard'; // Adjust the path as needed
 import Subtitle from '../../components/Typography/Subtitle'; // Adjust the path as needed
+import { getCompanyFeedback } from "../../services/feedback.service";
+//  check this file 
 
 const ViewFeedback = () => {
-  const chart1Data = {
-    labels: ["Excellent", "Good", "Average", "Poor"],
-    data: [60, 25, 10, 5],
+
+
+  const { companyName } = useParams();
+  const [data, setData] = useState({});
+  const [feedbackData, setFeedbackData] = useState({
+    overallExperience: [],
+    workEnvironment: [],
+    supportFromSeniors: [],
+    trainingAndDevelopment: [],
+  });
+
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  const processFeedback = (data, totalCount) => {
+    const total = data.length;
+    return total > 0
+      ? data.map(count => ((count / totalCount) * 100).toFixed(2))
+      : [0, 0, 0, 0, 0]; // Return zero percentages if no data
   };
 
-  const chart2Data = {
-    labels: ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied"],
-    data: [40, 35, 15, 10],
+
+  const fetchData = async () => {
+    try {
+      const response = await getCompanyFeedback(companyName);
+
+      if (response.status) {
+        const feedback = response.data;
+        console.log(feedback)
+        // setData(feedback)
+
+        // // Function to count occurrences and convert to percentag
+        setFeedbackData({
+          overallExperience: processFeedback(feedback?.overallExperience[0]?.counts, feedback?.overallExperience[0]?.totalCount),
+          workEnvironment: processFeedback(feedback?.workEnvironment[0]?.counts, feedback?.workEnvironment[0]?.totalCount),
+          supportFromSeniors: processFeedback(feedback?.supportFromSeniors[0]?.counts, feedback?.supportFromSeniors[0]?.totalCount),
+          trainingAndDevelopment: processFeedback(feedback?.trainingAndDevelopment[0]?.counts, feedback?.trainingAndDevelopment[0]?.totalCount),
+        });
+
+
+        console.log(feedbackData, "feedbackData")
+      } else {
+        console.error("Failed to fetch feedback data:", response.message);
+      }
+    } catch (error) {
+      console.error("Error fetching feedback data:", error);
+    }
   };
 
-  const chart3Data = {
-    labels: [
-      "Strongly Agree",
-      "Agree",
-      "Neutral",
-      "Disagree",
-      "Strongly Disagree",
-    ],
-    data: [50, 30, 10, 5, 5],
-  };
 
-  const chart4Data = {
-    labels: ["Yes", "No"],
-    data: [70, 30],
-  };
+  useEffect(() => {
+    console.log("Updated Data:", data);
+  }, [data]);
 
   return (
     <div className="p-2">
-      {/* Page Title */}
-      {/* <TitleCard title="Company Feedback Overview" ></TitleCard> */}
       <Subtitle subtitle="Here is a summary of the feedback received from our customers." />
 
       {/* Pie Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <PieChart
           title="Overall Experience"
-          data={chart1Data.data}
-          labels={chart1Data.labels}
+          data={feedbackData.overallExperience}
+          labels={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
         />
         <PieChart
           title="Work Environment"
-          data={chart2Data.data}
-          labels={chart2Data.labels}
+          data={feedbackData.workEnvironment}
+          labels={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
         />
         <PieChart
           title="Support from Seniors"
-          data={chart3Data.data}
-          labels={chart3Data.labels}
+          data={feedbackData.supportFromSeniors}
+          labels={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
         />
         <PieChart
           title="Training & Development"
-          data={chart4Data.data}
-          labels={chart4Data.labels}
+          data={feedbackData.trainingAndDevelopment}
+          labels={["Poor", "Fair", "Good", "Very Good", "Excellent"]}
         />
       </div>
 

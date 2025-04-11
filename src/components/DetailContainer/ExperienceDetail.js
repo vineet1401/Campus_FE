@@ -1,23 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { showNotification } from "../../redux/headerSlice";
-import InputText from "../Input/InputText";
-import TextAreaInput from "../Input/TextAreaInput";
-import SelectBox from "../Input/SelectBox";
-import UniversalModal from "../modals/UniversalModal";
-import ExperienceEditForm from "../EditFormLayout/ExperienceEditForm";
 
-function ExperienceDetail({ work, deleteWork, isEditable }) {
-  const dispatch = useDispatch();
+function ExperienceDetail({ work, deleteWork, isEditable, editWork }) {
 
-  const [experienceData, setExperienceData] = useState(work);
-
-  const updateProfile = () => {
-    dispatch(showNotification({ message: "Profile Updated", status: 1 }));
-  };
-
-  const updateFormValue = ({ name, value }) => {
-    setExperienceData((prev) => ({ ...prev, [name]: value }));
+  const EditForm = () => {
+    editWork();
+    document.getElementById("ExperienceFormModal").showModal();
   };
 
   return (
@@ -31,14 +18,20 @@ function ExperienceDetail({ work, deleteWork, isEditable }) {
 
           <div className="my-1">
             <p>
-              <span className="font-bold">positionTitle:</span>{" "}
+              <span className="font-bold">Position Title:</span>{" "}
               {work?.positionTitle}
             </p>
             <p>
-              <span className="font-bold">Start Date:</span> {work?.startDate}
+              <span className="font-bold">Job Type:</span>{" "}
+              {work?.jobType}
             </p>
             <p>
-              <span className="font-bold">End Date:</span> {work?.endDate}
+              <span className="font-bold">Start Date:</span>{" "}
+              {work?.startDate.substring(0, 10)}
+            </p>
+            <p>
+              <span className="font-bold">End Date:</span>{" "}
+              {work?.endDate.substring(0, 10)}
             </p>
           </div>
 
@@ -59,21 +52,15 @@ function ExperienceDetail({ work, deleteWork, isEditable }) {
           <div className="mb-2">
             <h4 className="font-bold">keyAchievements:</h4>
             <ul className="list-disc pl-5">
-              {/* {keyAchievements.map((achievement, index) => (
-                  <li key={index}>{achievement}</li>
-                ))} */}
-              <li>{work?.keyAchievements}</li>
+              {work?.keyAchievements?.map((achievement, index) => (
+                <li key={index}>{achievement}</li>
+              ))}
             </ul>
           </div>
 
           {isEditable && (
             <div className="card-actions justify-end">
-              <button
-                onClick={() =>
-                  document.getElementById("ExperienceFormModal").showModal()
-                }
-                className="btn btn-neutral"
-              >
+              <button onClick={EditForm} className="btn btn-neutral">
                 Edit
               </button>
               <button onClick={deleteWork} className="btn btn-error">
@@ -84,16 +71,8 @@ function ExperienceDetail({ work, deleteWork, isEditable }) {
         </div>
       </div>
       {/* </div> */}
-
-      <ExperienceEditForm
-        experienceData={experienceData}
-        updateFormValue={updateFormValue}
-        updateProfile={updateProfile}
-      />
     </>
   );
 }
-
-
 
 export default ExperienceDetail;

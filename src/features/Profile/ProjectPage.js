@@ -1,5 +1,4 @@
-import moment from "moment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Cards/TitleCard";
 import { showNotification } from "../../redux/headerSlice";
@@ -7,54 +6,66 @@ import { showNotification } from "../../redux/headerSlice";
 import ProjectDetail from "../../components/DetailContainer/ProjectDetail";
 import ProjectInputs from "../../components/FormsInputs/ProjectInputs";
 
-const GENDER = [
-  {
-    name: "Male",
-    value: "Male",
-  },
-  {
-    name: "Female",
-    value: "Female",
-  },
-];
+
+import { validateProjectData } from "../../validations/ProfileValidation";
+import { deleteProjectById, createProject } from "../../services/project.service";
+import {
+  addProject,
+  removeProject,
+} from "../../redux/studentDetailSlice";
+import ProjectEditForm from "../../components/EditFormLayout/ProjectEditForm";
+
+
+const INITIAL_PROJECT = {
+  projectName: "",
+  domainName: "",
+  startDate: "",
+  endDate: "",
+  description: [],
+  technologiesUsed: "",
+  links: "",
+}
 
 
 function ProjectPage() {
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.studentData.project);
 
-  const [data, setData] = useState([]);
-
-  const [project, setProject] = useState({
-    projectName: "",
-    domainName: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    technologiesUsed: "",
-    links: "",
-  });
+  console.log(data)
+  const [projectDataId, setProjectDataId] = useState("");
+  const [project, setProject] = useState(INITIAL_PROJECT);
 
   // Call API to update profile settings changes
-  const updateProfile = () => {
-    dispatch(showNotification({ message: "Profile Updated", status: 1 }));
-    data.push({ ...project, id: Date.now() });
-    setProject({
-      projectName: "",
-      domainName: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-      technologiesUsed: "",
-      links: "",
-    });
+  const updateProfile = async () => {
+
+    if (validateProjectData(project)) {
+      const response = await createProject(project);
+      if (response.status) {
+        dispatch(showNotification({ message: response.message, status: 1 }));
+        dispatch(addProject(response.data));
+        setProject(INITIAL_PROJECT);
+      } else {
+        dispatch(showNotification({ message: response.message, status: 0 }));
+      }
+    } else {
+      dispatch(
+        showNotification({ message: "All Feilds are mandatory", status: 0 })
+      );
+    }
   };
 
   const updateFormValue = ({ name, value }) => {
     setProject((prev) => ({ ...prev, [name]: value }));
   };
 
-  const deleteProject = (id) => {
-    setData(data.filter((project) => project.id != id));
+  const deleteProject = async (id) => {
+    const response = await deleteProjectById(id);
+    if (response.status) {
+      dispatch(showNotification({ message: response.message, status: 1 }));
+      dispatch(removeProject(id));
+    } else {
+      dispatch(showNotification({ message: response.message, status: 0 }));
+    }
   };
 
   return (
@@ -81,9 +92,10 @@ function ProjectPage() {
         {data.length ? (
           data.map((project) => (
             <ProjectDetail
-              key={project.id}
+              key={project._id}
               project={project}
               deleteProject={() => deleteProject(project.id)}
+              editProject={() => setProjectDataId(project._id)}
               isEditable={true}
             />
           ))
@@ -91,6 +103,8 @@ function ProjectPage() {
           <h2 className="font-semibold">No Project Added</h2>
         )}
       </TitleCard>
+
+      <ProjectEditForm projectDataId={projectDataId} />
     </>
   );
 }

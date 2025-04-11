@@ -9,22 +9,20 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import { toast } from 'react-toastify';
 
 function Layout() {
   const dispatch = useDispatch();
-  const { newNotificationMessage, newNotificationStatus } = useSelector(
-    (state) => state.header
-  );
+  // const { newNotificationMessage, newNotificationStatus } = useSelector(
+  //   (state) => state.header
+  // );
 
-  useEffect(() => {
-    if (newNotificationMessage !== "") {
-      if (newNotificationStatus === 1)
-        NotificationManager.success(newNotificationMessage, "Success");
-      if (newNotificationStatus === 0)
-        NotificationManager.error(newNotificationMessage, "Error");
-      dispatch(removeNotificationMessage());
-    }
-  }, [newNotificationMessage]);
+  // useEffect(() => {
+  //   if (newNotificationMessage !== "") {
+  //     if (newNotificationStatus === 1) toast.success(newNotificationMessage);
+  //     if (newNotificationStatus === 0) toast.error(newNotificationMessage);
+  //   }
+  // }, [newNotificationMessage]);
 
   return (
     <>

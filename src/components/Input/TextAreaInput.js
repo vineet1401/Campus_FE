@@ -9,7 +9,7 @@ const TextAreaInput = ({
   defaultValue,
   placeholder,
   updateFormValue,
-  updateType,
+  readOnly
 }) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : "");
 
@@ -26,8 +26,9 @@ const TextAreaInput = ({
         </span>
       </label>
       <textarea
-        value={defaultValue}
+        value={value}
         name={name}
+        readOnly={readOnly || false}
         rows={1}
         className="textarea textarea-bordered w-full border-2 border-gray-400 focus:border-gray-700"
         placeholder={placeholder || ""}

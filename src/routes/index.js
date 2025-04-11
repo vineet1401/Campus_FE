@@ -2,6 +2,7 @@
 
 import { lazy } from "react";
 import { Admin, Alumni, Student } from "../app/rbacAuth";
+import Aptitude from "../features/Learning/Aptitude";
 
 // Pages for dashboard
 const Dashboard = lazy(() => import("../pages/Dashboard"));
@@ -18,6 +19,11 @@ const AddNotice = lazy(() => import("../pages/Notice/AddNotice"));
 // Pages for Feedback
 const FeedbackCards = lazy(() => import("../pages/Drive/AppliedDrive"));
 const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
+
+// Pages for Learning
+
+const DSA = lazy(() => import("../pages/Learning/Coding"));
+const apti = lazy(() => import("../pages/Learning/Aptitude"))
 
 // Pages for Profile
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
@@ -102,16 +108,25 @@ const routes = [
   },
   {
     path: "feedback",
-    component: <FeedbackCards />,
+    component:
+      <FeedbackCards />,
   },
   {
-    path: "404",
-    component: <Page404 />,
+    path: "dsa",
+    component: <DSA />
   },
   {
-    path: "view-feedback",
+    path: "apti",
+    component: <Aptitude />,
+  },
+  {
+    path: "view-feedback/:companyName",
     component: <ViewFeedback />,
   },
+  //  {
+  //   path:"/coding",
+  //   component: <Coding />
+  //  } 
 ];
 
 export default routes;
