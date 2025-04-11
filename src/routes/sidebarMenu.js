@@ -124,6 +124,13 @@ const routes = [
 
       },
       {
+        path: "resume", // url
+        icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+        name: "Resume Analyser", // name that appear in Sidebar
+
+
+      },
+      {
         path: "",
         icon: <UsersIcon className={`${iconClasses} inline`} />,
         name: "Profile",

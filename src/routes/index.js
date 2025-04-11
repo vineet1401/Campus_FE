@@ -25,6 +25,10 @@ const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
 const DSA = lazy(() => import("../pages/Learning/Coding"));
 const apti = lazy(() => import("../pages/Learning/Aptitude"))
 
+// pages for resume
+
+const Resume = lazy(() => import("../pages/Resume Analyser/resume"))
+
 // Pages for Profile
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/Profile/EducationProfile"));
@@ -118,6 +122,10 @@ const routes = [
   {
     path: "apti",
     component: <Aptitude />,
+  },
+  {
+    path: "resume",
+    component: <Resume />,
   },
   {
     path: "view-feedback/:companyName",

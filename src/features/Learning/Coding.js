@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import { setPageTitle } from '../../redux/headerSlice';
 import { storeCodingProgress, getCodingProgress } from '../../services/codingProgress';
+import { getAllCoding } from '../../services/coding.service';
 
 const DisplayData = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,6 @@ const DisplayData = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [progress, setProgress] = useState({});
 
-  // Normalize key to ensure matching is case-insensitive and whitespace-agnostic
   const getKey = (category, question) =>
     `${category.trim().toLowerCase()}_${question.trim().toLowerCase()}`;
 
@@ -32,24 +32,37 @@ const DisplayData = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    fetch('/convertcsv.json')
-      .then(res => res.json())
-      .then(json => setData(json))
+    getAllCoding()
+      .then((res) => {
+        const dbData = res.data.data; // ✅ FIXED
+        console.log("API data received:", dbData);
+
+        const grouped = {};
+        dbData.forEach(item => {
+          const cat = item.category;
+          if (!grouped[cat]) grouped[cat] = [];
+          grouped[cat].push({
+            Question: item.question,
+            Links: item.link
+          });
+        });
+
+        console.log("Grouped Data:", grouped); // ✅ should now show categorized questions
+        setData(grouped);
+      })
       .catch(err => console.error("Error loading data:", err));
   }, []);
 
-  // console.log("CSV Key:", getKey(category, item.Question));
 
+  console.log("data", data)
 
   useEffect(() => {
     if (user?._id && data) {
       getCodingProgress()
         .then((res) => {
           const doneEntries = res.data.data;
-          // console.log("API Response:", res.data.data);
 
           const progMap = {};
-
           doneEntries.forEach(item => {
             const key = getKey(item.category, item.question);
             progMap[key] = true;
@@ -60,8 +73,6 @@ const DisplayData = () => {
         .catch(err => console.error("Error loading progress:", err));
     }
   }, [user, data]);
-  // console.log("Matched Keys from API:", Object.keys(progMap));
-
 
   const handleCheckboxChange = async (category, questionText, checked) => {
     if (!user || !user._id) {
@@ -165,3 +176,4 @@ const DisplayData = () => {
 };
 
 export default DisplayData;
+
