@@ -63,14 +63,14 @@ function DriveHomePage() {
     fetchAndFilterDrives(); // Fetch and filter drives when component mounts or when activeTab changes
   }, [activeTab]); // Re-run when activeTab changes
 
-  const updateDashboardPeriod = (newRange) => {
-    dispatch(
-      showNotification({
-        message: `Period updated to ${newRange.startDate} to ${newRange.endDate}`,
-        status: 1,
-      })
-    );
-  };
+  // const updateDashboardPeriod = (newRange) => {
+  //   dispatch(
+  //     showNotification({
+  //       message: `Period updated to ${newRange.startDate} to ${newRange.endDate}`,
+  //       status: 1,
+  //     })
+  //   );
+  // };
 
   return (
     <>
