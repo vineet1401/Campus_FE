@@ -39,6 +39,7 @@ function CreateDrive() {
             if (response.status) {
                 dispatch(showNotification({ message: "Drive Added", status: 1 }));
                 setDriveData(initialObj)
+                window.history.back();
             } else {
                 dispatch(showNotification({ message: response.message, status: 0 }));
             }

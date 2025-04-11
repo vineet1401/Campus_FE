@@ -47,9 +47,11 @@ export const Card = ({drive, onClick}) => {
         <NavLink to={`/app/view-feedback/${drive?.jobInfo?.companyName}`}>
           <button className="btn btn-primary p-1 ">View FeedBack</button>
         </NavLink>
-        <button onClick={onClick} className="btn btn-primary p-1 ">
+        <NavLink to={`/app/drive-details/${drive?._id}`}>
+        <button className="btn btn-primary p-1 ">
           View Details
         </button>
+        </NavLink>
       </div>
     </div>
   );

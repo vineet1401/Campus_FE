@@ -13,7 +13,7 @@ const ProjectInputs = ({ projectData, updateFormValue }) => {
     if (projectInput.trim()) {
       const newProjects = [...projectData.description, projectInput.trim()];
       updateFormValue({ name: "description", value: newProjects });
-      setProjectInput(""); // Clear the input field
+      setProjectInput(); // Clear the input field
     }
   };
 
@@ -77,7 +77,7 @@ const ProjectInputs = ({ projectData, updateFormValue }) => {
         <TextAreaInput
           labelTitle="Description"
           name="description"
-          defaultValue={projectInput}
+          value={projectInput}
           placeholder="Description"
           updateFormValue={updateProjectInput}
         />

@@ -7,7 +7,8 @@ import DriveDetails from '../../features/Drive/DriveDetail';
 function InternalPage(){
       const dispatch = useDispatch()
       const { id } = useParams(); // Get the ID from the URL parameters
-      const driveId = parseInt(id); // Convert the id from string to number
+      const driveId = id; // Convert the id from string to number
+      console.log("Drive id", id)
       
        // Find the drive by ID
 

@@ -105,3 +105,52 @@ export const deleteDriveById = async (id) => {
    };
  }
 };
+
+// Apply to a placement drive
+export const applyToDrive = async (driveId, userId) => {
+  try {
+    const response = await axios.post(`/api/drive/apply/${driveId}`, {
+      userId,
+    });
+
+    return {
+      status: response.data.status,
+      message: response.data.message,
+      data: response.data.data || null,
+    };
+  } catch (error) {
+    console.error(`Failed to apply to drive ID: ${driveId}`, error);
+    return {
+      status: error.response ? error.response.data.status : false,
+      message: error.response
+        ? error.response.data.message
+        : "Failed to apply to placement drive",
+      data: null,
+    };
+  }
+};
+
+
+
+export const withdrawApplication = async (driveId, userId) => {
+  try {
+    const response = await axios.post(`/api/drive/withdraw/${driveId}`, {
+      userId,
+    });
+
+    return {
+      status: response.data.status,
+      message: response.data.message,
+      data: response.data.data || null,
+    };
+  } catch (error) {
+    console.error(`Failed to withdraw application from drive ID: ${driveId}`, error);
+    return {
+      status: error.response ? error.response.data.status : false,
+      message: error.response
+        ? error.response.data.message
+        : "Failed to withdraw application",
+      data: null,
+    };
+  }
+};

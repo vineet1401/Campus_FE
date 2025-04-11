@@ -2,46 +2,98 @@ import React, { useState, useEffect } from "react";
 import { getDrives } from "./drivesAPI";
 import { useNavigate } from "react-router-dom";
 import DriveDetailsSkeleton from "../../components/Drive/DriveDetailsSkeleton";
+import {
+  applyToDrive,
+  deleteDriveById,
+  getDriveById,
+  withdrawApplication,
+} from "../../services/drive.service";
+import { getRoleFromToken, getUserIdFromToken } from "../../app/rbacAuth";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../redux/headerSlice";
 
 function DriveDetail({ id }) {
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const [drive, setDrive] = useState(null);
+  const [isCurrent, setIsCurrent] = useState(false);
+  const role = getRoleFromToken();
+  const userId = getUserIdFromToken();
+  const [hasApplied, setHasApplied] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (drive && drive.appliedStudents && userId) {
+      const applied = drive.appliedStudents.some(
+        (student) => student.userId === userId
+      );
+      setHasApplied(applied);
+    }
+  }, [drive, userId]);
+
   useEffect(() => {
     const fetchDrives = async () => {
-      const drives = await getDrives(); // Fetch all drives
-      const selectedDrive = drives.find((drive) => drive.id === Number(id)); // Find the drive by ID
-      setDrive(selectedDrive);
-      setLoading(true);
-      // Simulate fetch time
-      setTimeout(() => {
-        // setData(DriveListDrives());
-        setLoading(false);
-      }, 1000); // Set loading to false after data is fetched
+      const drives = await getDriveById(id); // Fetch all drives
+      setDrive(drives.data);
     };
 
     fetchDrives();
   }, [id]);
 
+  useEffect(() => {
+    const targetDate = new Date();
+    const startDate = new Date(drive?.jobInfo?.startDate);
+    const endDate = new Date(drive?.jobInfo?.endDate);
+
+    if (targetDate >= startDate && targetDate <= endDate) {
+      console.log("inside current");
+      setIsCurrent(true);
+    } else {
+      setIsCurrent(false);
+    }
+  }, [id, drive]);
+
   const handleBackClick = () => {
     navigate(-1); // Go back to the previous page
   };
 
-  const handleApplyClick = () => {
-    // Redirect to the apply page or trigger an apply action
-    alert("Redirecting to Apply Page");
+  const handleApplyClick = async () => {
+    const result = await applyToDrive(id, userId);
+    if (result.status) {
+      alert("Applied successfully!");
+      setHasApplied(true)
+    } else {
+      alert(result.message);
+    }
   };
 
-  if (loading) {
-    return <DriveDetailsSkeleton />;
-  }
+  const handleWithdraw = async () => {
+    const result = await withdrawApplication(id, userId);
+    if (result.status) {
+      alert("Application withdrawn successfully!");
+      setHasApplied(false);
+    } else {
+      alert(result.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    const deleteResult = await deleteDriveById(id);
+    if (deleteResult.status) {
+      dispatch(showNotification({ message: deleteResult.message, status: 1 }));
+      window.history.back();
+    } else {
+      dispatch(showNotification({ message: deleteResult.message, status: 0 }));
+    }
+  };
+
+  // if (loading) {
+  //   return <DriveDetailsSkeleton />;
+  // }
 
   if (!drive) {
     return <p>Drive not found</p>;
   }
-
-  const isCurrent = drive.status === "Current"; // Check if the drive is current
 
   return (
     <div className="p-8 flex flex-col md:flex-row">
@@ -51,24 +103,24 @@ function DriveDetail({ id }) {
           <span className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
           <div className="h-50 w-full">
             <img
-              src={drive.logoUrl}
-              alt={drive.companyName}
+              src={drive?.jobInfo?.imageUrl}
+              alt={drive?.jobInfo?.companyName}
               className="h-full w-full rounded-lg"
             />
           </div>
         </div>
 
         <h2 className="mt-4 max-w-sm text-xl font-semibold">
-          {drive.companyName}
+          {drive?.jobInfo?.companyName}
         </h2>
-        <address className="text-gray-600 mt-4">{drive.address}</address>
+        <address className="text-gray-600 mt-4">
+          {drive?.jobInfo?.companyAddress}
+        </address>
         <div className="mt-4">
           <p className="font-semibold">Contact Person</p>
-          <p>
-            {drive.contactPerson.name} ({drive.contactPerson.role})
-          </p>
-          <p>Phone: {drive.contactPerson.phone}</p>
-          <p>Email: {drive.contactPerson.email}</p>
+          <p>{drive?.jobInfo?.tnpCordinatorName}</p>
+          <p>Phone: {drive?.jobInfo?.tnpCordinatorNumber}</p>
+          <p>Email: {drive?.jobInfo?.tnpCordinatorEmail}</p>
         </div>
       </div>
 
@@ -78,24 +130,29 @@ function DriveDetail({ id }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <p>
-              <strong>Designation:</strong> {drive.designation}
+              <strong>Designation:</strong> {drive?.jobInfo?.jobDesignation}
             </p>
             <p>
-              <strong>Package:</strong> {drive.salaryPackage} per annum
+              <strong>Package:</strong> {drive?.jobInfo?.jobSalary} per annum
             </p>
             <p>
-              <strong>Location:</strong> {drive.location}
+              <strong>Location:</strong> {drive?.jobInfo?.companyAddress}
             </p>
           </div>
           <div>
             <p>
-              <strong>Drive Date:</strong> {drive.driveDate}
+              <strong>Drive Date:</strong> {drive?.jobInfo?.driveDate}
             </p>
             <p>
-              <strong>Programs:</strong> {drive.programs}
+              <strong>Programs:</strong> {drive?.jobInfo?.program}
             </p>
             <p>
-              <strong>Streams:</strong> {drive.streams}
+              <strong>Streams:</strong> {drive?.jobInfo?.stream}
+            </p>
+            <p>
+              <strong>Drive Registration Duration:</strong>{" "}
+              {new Date(drive?.jobInfo?.startDate).toDateString()} to{" "}
+              {new Date(drive?.jobInfo?.endDate).toDateString()}
             </p>
           </div>
           <div>
@@ -103,15 +160,15 @@ function DriveDetail({ id }) {
               <strong>Criteria:</strong>
             </p>
             <div style={{ marginLeft: "20px" }}>
-              <p>Max Backlogs: {drive.criteria.maxBacklogs}</p>
-              <p>Throughout %: {drive.criteria.throughoutPercentage}</p>
+              <p>Max Backlogs: {drive?.jobInfo?.maxBacklog}</p>
+              <p>Throughout %: {drive?.jobInfo?.throughoutPercentage}</p>
             </div>
           </div>
           <div className="col-span-1 sm:col-span-2">
             <p>
               <strong>Description:</strong>{" "}
-              {drive.description
-                ? drive.description
+              {drive?.jobInfo?.jobDescription
+                ? drive?.jobInfo?.jobDescription
                 : "No description available."}
             </p>
           </div>
@@ -126,12 +183,28 @@ function DriveDetail({ id }) {
         >
           Go Back
         </button>
-        {isCurrent && (
+        {role == "Admin" && (
+          <button
+            onClick={handleDelete}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            Delete
+          </button>
+        )}
+        {role == "Student" && isCurrent && (
           <button
             onClick={handleApplyClick}
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             Apply
+          </button>
+        )}
+        {role == "Student" && isCurrent && hasApplied && (
+          <button
+            onClick={handleWithdraw}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            Withdraw
           </button>
         )}
       </div>

@@ -14,6 +14,19 @@ export const getRoleFromToken = () => {
   }
 };
 
+export const getUserIdFromToken = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    const user = jwtDecode(token);
+    return user.id;
+  } catch (error) {
+    console.error("Failed to decode token", error);
+    return null;
+  }
+};
+
 export const Admin = ({ children }) => {
   console.log("Admin portal");
   const role = getRoleFromToken();
