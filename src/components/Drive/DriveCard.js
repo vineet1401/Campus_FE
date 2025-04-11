@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export const Card = ({drive, onClick}) => {
+export const Card = ({ drive, onClick }) => {
   return (
     <div className="relative block shadow overflow-hidden rounded-lg border border-black dark:border-white p-4 sm:p-6 lg:p-8 shadow-lg dark:shadow-gray-700">
       <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
@@ -47,10 +47,15 @@ export const Card = ({drive, onClick}) => {
         <NavLink to={`/app/view-feedback/${drive?.jobInfo?.companyName}`}>
           <button className="btn btn-primary p-1 ">View FeedBack</button>
         </NavLink>
+        <NavLink to={`/app/applied-student/${drive?._id}`}>
+          <button className="btn btn-primary p-1 ">
+            Applied Students
+          </button>
+        </NavLink>
         <NavLink to={`/app/drive-details/${drive?._id}`}>
-        <button className="btn btn-primary p-1 ">
-          View Details
-        </button>
+          <button className="btn btn-primary p-1 ">
+            View Details
+          </button>
         </NavLink>
       </div>
     </div>
