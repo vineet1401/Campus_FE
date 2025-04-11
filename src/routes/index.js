@@ -11,6 +11,7 @@ const Dashboard = lazy(() => import("../pages/Dashboard"));
 const CreateDrive = lazy(() => import("../pages/Drive/CreateDrive"));
 const DrivePage = lazy(() => import("../pages/Drive/DrivePage"));
 const DriveDetails = lazy(() => import("../pages/Drive/DriveDetails"));
+const StudentList = lazy(() => import("../pages/Drive/AppliedStudentsPage"));
 
 // Pages for Notice
 const ViewNotice = lazy(() => import("../pages/Notice/ViewNotice"));
@@ -24,6 +25,11 @@ const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
 
 const DSA = lazy(() => import("../pages/Learning/Coding"));
 const apti = lazy(() => import("../pages/Learning/Aptitude"))
+
+// pages for resume
+
+const Resume = lazy(() => import("../pages/Resume Analyser/resume"))
+
 
 // Pages for Profile
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
@@ -107,6 +113,10 @@ const routes = [
     component: <DriveDetails />,
   },
   {
+    path: "applied-student/:id",
+    component: <StudentList />,
+  },
+  {
     path: "feedback",
     component:
       <FeedbackCards />,
@@ -118,6 +128,10 @@ const routes = [
   {
     path: "apti",
     component: <Aptitude />,
+  },
+  {
+    path: "resume",
+    component: <Resume />,
   },
   {
     path: "view-feedback/:companyName",
