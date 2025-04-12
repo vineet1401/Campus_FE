@@ -44,8 +44,8 @@ import { useDispatch } from "react-redux";
 import TitleCard from "../../components/Cards/TitleCard";
 import AddNoticeInputs from "../../components/FormsInputs/AddNoticeInputs";
 import { createNotification } from "../../services/notice.service";
-import { useState } from "react";
 import { validateCreateNotice } from "../../validations/NoticeValidation";
+import { showNotification } from "../../redux/headerSlice";
 
 const initialNoticeObj = {
   notifyTitle: '',           // Notification Title
