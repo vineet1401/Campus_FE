@@ -132,6 +132,7 @@ const TanStackTable = () => {
                     )}
                 </tbody>
             </table>
+            
 
             {/* Pagination */}
             <div className="flex items-center justify-end mt-4 gap-2">
