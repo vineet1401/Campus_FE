@@ -5,6 +5,7 @@ import GiveFeedbackInputs from "../../components/FormsInputs/GiveFeedbackImputs"
 import UniversalModal from "../../components/modals/UniversalModal";
 import { createFeedback } from "../../services/feedback.service";
 import { validateFeedbackData } from "../../validations/FeedbackValidation";
+import { getUserIdFromToken } from "../../app/rbacAuth";
 
 
 
@@ -18,20 +19,12 @@ const INITIAL_FEEDBACK = {
   
 };
 
-function FeedbackForm({driveId,companyName}) {
-  const formRef = useRef();
+function FeedbackForm({driveId}) {
   const dispatch = useDispatch();
   const [feedback, setFeedback] = useState(INITIAL_FEEDBACK);
 
-  useEffect(()=>{
-    setFeedback(prev=>({...prev,driveId,companyName}));
-    console.log(driveId,"driveid")
-
-  },[driveId,companyName])
 
   const updateFeedback = async () => {
-    console.log(feedback)
-
     if (!validateFeedbackData(feedback)) {
       dispatch(showNotification({ message: "Please fill in all required fields", status: 0 }));
       return;
@@ -39,7 +32,7 @@ function FeedbackForm({driveId,companyName}) {
 
    try {
     
-        const response = await createFeedback(feedback); // Call the API
+        const response = await createFeedback({...feedback, driveId}); // Call the API
         if (response.status) {
             dispatch(showNotification({ message: "Feedback Added", status: 1 }));
             setFeedback(INITIAL_FEEDBACK)
@@ -56,11 +49,8 @@ function FeedbackForm({driveId,companyName}) {
 
   // Handle Form Value Updates
   const updateFormValue = ({name, value}) => {
-   
     setFeedback((prev) => ({ ...prev, [name]: value }));
   };
-
-  // 
 
   return (
     <UniversalModal id="FeedbackFormModal" title="Give Feedback">

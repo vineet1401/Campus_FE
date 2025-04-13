@@ -55,12 +55,12 @@ function App() {
         ]);
 
         if (studentPersonal.status) {
-          dispatch(
-            showNotification({
-              message: `${studentPersonal.message}`,
-              status: 1,
-            })
-          );
+          // dispatch(
+          //   showNotification({
+          //     message: `${studentPersonal.message}`,
+          //     status: 1,
+          //   })
+          // );
           dispatch(setPersonalData(studentPersonal.data));
         } else {
           dispatch(
@@ -72,12 +72,12 @@ function App() {
         }
 
         if (educationData.status) {
-          dispatch(
-            showNotification({
-              message: `${educationData.message}`,
-              status: 1,
-            })
-          );
+          // dispatch(
+          //   showNotification({
+          //     message: `${educationData.message}`,
+          //     status: 1,
+          //   })
+          // );
           dispatch(setEducation(educationData.data));
         } else {
           dispatch(
@@ -89,12 +89,12 @@ function App() {
         }
 
         if (experienceData.status) {
-          dispatch(
-            showNotification({
-              message: `${experienceData.message}`,
-              status: 1,
-            })
-          );
+          // dispatch(
+          //   showNotification({
+          //     message: `${experienceData.message}`,
+          //     status: 1,
+          //   })
+          // );
           dispatch(setExperience(experienceData.data));
         } else {
           dispatch(
@@ -106,12 +106,12 @@ function App() {
         }
 
         if (projectData.status) {
-          dispatch(
-            showNotification({
-              message: `${projectData.message}`,
-              status: 1,
-            })
-          );
+          // dispatch(
+          //   showNotification({
+          //     message: `${projectData.message}`,
+          //     status: 1,
+          //   })
+          // );
           dispatch(setProject(projectData.data));
         } else {
           dispatch(

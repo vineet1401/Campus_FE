@@ -28,7 +28,7 @@ const TanStackTable = ({ driveId }) => {
   const fetchAppliedStudents = async () => {
     const response = await getStudentApplicationsByDriveId(driveId);
     if (response.status) {
-      dispatch(showNotification({ message: response.message, status: 1 }));
+      // dispatch(showNotification({ message: response.message, status: 1 }));
       setAppliedStudent(response.data);
     } else {
       dispatch(showNotification({ message: response.message, status: 1 }));

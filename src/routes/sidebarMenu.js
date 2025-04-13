@@ -96,11 +96,11 @@ const routes = [
     ],
   },
 
-  {
-    path: "/app/feedback", // url
-    icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
-    name: "FeedBack", // name that appear in Sidebar
-  },
+  // {
+  //   path: "/app/feedback", // url
+  //   icon: <DocumentTextIcon className={submenuIconClasses} />, // icon component
+  //   name: "FeedBack", // name that appear in Sidebar
+  // },
 
 
   ...(role === "Student"
@@ -139,6 +139,11 @@ const routes = [
             path: "/app/view-profile-details",
             icon: <UserIcon className={submenuIconClasses} />,
             name: "View Detail",
+          },
+          {
+            path: "/app/view-applied-drive",
+            icon: <DocumentTextIcon className={submenuIconClasses} />,
+            name: "View Applied Drive",
           },
           {
             path: "/app/profile-personal",

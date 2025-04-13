@@ -25,13 +25,10 @@ export const createFeedback = async (feedbackData) => {
 // Get all feedback records
 
 
-export const getCompanyFeedback = async (companyName) => {
+export const getCompanyFeedback = async (driveId) => {
   try {
-    // Make GET request with companyName as a query parameter
-    const response = await axios.get('/api/feedback/fetch-all-feedback', {
-      params: { companyName : companyName.toLowerCase()} // Send companyName as a query parameter
-      
-    });
+    // Make GET request with  as a query parameter
+    const response = await axios.get('/api/feedback/fetch-all-feedback/'+driveId);
 
     // Return the data with status and message from the response
     return {

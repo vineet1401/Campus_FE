@@ -38,6 +38,7 @@ const ExperienceDetail = lazy(() =>
   import("../pages/Profile/ExperienceProfile")
 );
 const ProjectDetail = lazy(() => import("../pages/Profile/ProjectProfile"));
+const AppliedDriveDetail = lazy(() => import("../pages/Profile/AppliedDriveDetail"));
 
 const Welcome = lazy(() => import("../pages/Welcome"));
 const Page404 = lazy(() => import("../pages/404"));
@@ -115,6 +116,14 @@ const routes = [
       </Student>
     ),
   },
+  {
+    path: "view-applied-drive",
+    component: (
+      <Student>
+        <AppliedDriveDetail />
+      </Student>
+    ),
+  },
 
   {
     path: "drive-details/:id",
@@ -124,10 +133,10 @@ const routes = [
     path: "applied-student/:driveId",
     component: <StudentList />,
   },
-  {
-    path: "feedback",
-    component: <FeedbackCards />,
-  },
+  // {
+  //   path: "feedback",
+  //   component: <FeedbackCards />,
+  // },
   {
     path: "dsa",
     component: <DSA />,
@@ -141,7 +150,7 @@ const routes = [
     component: <Resume />,
   },
   {
-    path: "view-feedback/:companyName",
+    path: "view-feedback/:companyName/:driveId",
     component: <ViewFeedback />,
   },
   //  {

@@ -44,14 +44,14 @@ export const Card = ({ drive, onClick }) => {
         </div>
       </dl>
       <div className="mt-2 flex justify-between">
-        <NavLink to={`/app/view-feedback/${drive?.jobInfo?.companyName}`}>
+        {/* <NavLink to={`/app/view-feedback/${drive?.jobInfo?.companyName}`}>
           <button className="btn btn-primary p-1 ">View FeedBack</button>
         </NavLink>
         <NavLink to={`/app/applied-student/${drive?._id}`}>
           <button className="btn btn-primary p-1 ">
             Applied Students
           </button>
-        </NavLink>
+        </NavLink> */}
         <NavLink to={`/app/drive-details/${drive?._id}`}>
           <button className="btn btn-primary p-1 ">
             View Details

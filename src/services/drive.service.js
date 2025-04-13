@@ -107,10 +107,10 @@ export const deleteDriveById = async (id) => {
 };
 
 // Apply to a placement drive
-export const applyToDrive = async (driveId, DriveId) => {
+export const applyToDrive = async (driveId, userId) => {
   try {
     const response = await axios.post(`/api/drive/apply/${driveId}`, {
-      DriveId,
+      userId,
     });
 
     return {
@@ -132,10 +132,10 @@ export const applyToDrive = async (driveId, DriveId) => {
 
 
 
-export const withdrawApplication = async (driveId, DriveId) => {
+export const withdrawApplication = async (driveId, userId) => {
   try {
     const response = await axios.post(`/api/drive/withdraw/${driveId}`, {
-      DriveId,
+      userId,
     });
 
     return {
@@ -197,6 +197,26 @@ export const updateApplicationStatus = async ({ driveId, userId, status }) => {
       status: false,
       message: "Failed to update application status",
       data: null,
+    };
+  }
+};
+
+
+export const fetchAppliedDrivesByUser = async (userId) => {
+  try {
+    const response = await axios.get(`/api/drive/fetch-user-drive/${userId}`);
+
+    return {
+      status: response.data.status,
+      message: response.data.message,
+      data: response.data.data,
+    };
+  } catch (error) {
+    console.error("Error fetching applied drives:", error);
+    return {
+      status: false,
+      message: "Failed to fetch applied drives",
+      data: [],
     };
   }
 };

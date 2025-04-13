@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setPageTitle } from "../../redux/headerSlice";
 // import  GettingStarted from '../features/documentation/DocGettingStarted'
-import AppliedDrivesList from "../../features/feedback/AppliedDrive";
+// import AppliedDrivesList from "../../features/feedback/AppliedDrive";
 import TitleCard from "../../components/Cards/TitleCard";
 
 function InternalPage() {
@@ -12,7 +12,7 @@ function InternalPage() {
     dispatch(setPageTitle({ title: "Feedback" }));
   }, []);
 
-  return <AppliedDrivesList />;
+  // return <AppliedDrivesList />;
 }
 
 export default InternalPage;

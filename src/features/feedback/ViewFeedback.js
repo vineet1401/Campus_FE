@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import PieChart from '../../features/charts/components/PieChart'; // Adjust the path as needed
-import TitleCard from '../../components/Cards/TitleCard'; // Adjust the path as needed
-import Subtitle from '../../components/Typography/Subtitle'; // Adjust the path as needed
+import PieChart from "../../features/charts/components/PieChart"; // Adjust the path as needed
+import TitleCard from "../../components/Cards/TitleCard"; // Adjust the path as needed
+import Subtitle from "../../components/Typography/Subtitle"; // Adjust the path as needed
 import { getCompanyFeedback } from "../../services/feedback.service";
-//  check this file 
+//  check this file
 
 const ViewFeedback = () => {
-
-
+  const { driveId } = useParams();
   const { companyName } = useParams();
   const [data, setData] = useState({});
   const [feedbackData, setFeedbackData] = useState({
@@ -17,42 +16,59 @@ const ViewFeedback = () => {
     workEnvironment: [],
     supportFromSeniors: [],
     trainingAndDevelopment: [],
+    additionalComments: [],
   });
-
-
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [driveId]);
 
+  const processFeedback = (data = [], totalCount = 0) => {
+    const ratingMap = {};
 
-  const processFeedback = (data, totalCount) => {
-    const total = data.length;
-    return total > 0
-      ? data.map(count => ((count / totalCount) * 100).toFixed(2))
-      : [0, 0, 0, 0, 0]; // Return zero percentages if no data
+    // Create a map from the aggregated counts
+    data.forEach((item) => {
+      ratingMap[item._id] = item.count;
+    });
+
+    // Ratings from 5 (Excellent) to 1 (Poor)
+    const ratings = [5, 4, 3, 2, 1];
+
+    // Compute percentage for each rating
+    return ratings.map((rating) => {
+      const count = ratingMap[rating] || 0;
+      return totalCount > 0 ? ((count / totalCount) * 100).toFixed(2) : "0.00";
+    });
   };
-
 
   const fetchData = async () => {
     try {
-      const response = await getCompanyFeedback(companyName);
+      const response = await getCompanyFeedback(driveId);
 
       if (response.status) {
         const feedback = response.data;
-        console.log(feedback)
-        // setData(feedback)
 
         // // Function to count occurrences and convert to percentag
         setFeedbackData({
-          overallExperience: processFeedback(feedback?.overallExperience[0]?.counts, feedback?.overallExperience[0]?.totalCount),
-          workEnvironment: processFeedback(feedback?.workEnvironment[0]?.counts, feedback?.workEnvironment[0]?.totalCount),
-          supportFromSeniors: processFeedback(feedback?.supportFromSeniors[0]?.counts, feedback?.supportFromSeniors[0]?.totalCount),
-          trainingAndDevelopment: processFeedback(feedback?.trainingAndDevelopment[0]?.counts, feedback?.trainingAndDevelopment[0]?.totalCount),
+          overallExperience: processFeedback(
+            feedback?.overallExperience[0]?.counts,
+            feedback?.overallExperience[0]?.totalCount
+          ),
+          workEnvironment: processFeedback(
+            feedback?.workEnvironment[0]?.counts,
+            feedback?.workEnvironment[0]?.totalCount
+          ),
+          supportFromSeniors: processFeedback(
+            feedback?.supportFromSeniors[0]?.counts,
+            feedback?.supportFromSeniors[0]?.totalCount
+          ),
+          trainingAndDevelopment: processFeedback(
+            feedback?.trainingAndDevelopment[0]?.counts,
+            feedback?.trainingAndDevelopment[0]?.totalCount
+          ),
+          additionalComments: feedback.additionalComments,
         });
 
-
-        console.log(feedbackData, "feedbackData")
       } else {
         console.error("Failed to fetch feedback data:", response.message);
       }
@@ -60,11 +76,6 @@ const ViewFeedback = () => {
       console.error("Error fetching feedback data:", error);
     }
   };
-
-
-  useEffect(() => {
-    console.log("Updated Data:", data);
-  }, [data]);
 
   return (
     <div className="p-2">
@@ -97,11 +108,30 @@ const ViewFeedback = () => {
       {/* Description Section */}
       <div className="mt-6">
         <TitleCard title="Feedback Summary">
-          <p>
-            Here you can provide a detailed description of the feedback
-            collected. Include insights, observations, and any trends identified
-            from the pie charts above.
-          </p>
+          <ul className="space-y-3 max-h-96 overflow-y-auto">
+            {feedbackData.additionalComments
+              .slice(0, 4)
+              .map((comment, index) => (
+                <li
+                  key={index}
+                  className="bg-base-200 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="avatar placeholder">
+                      <div className="bg-neutral-focus text-neutral-content rounded-full w-8 h-8">
+                        <span>{index + 1}</span>
+                      </div>
+                    </div>
+                    <p className="text-base-content text-sm">{comment}</p>
+                  </div>
+                </li>
+              ))}
+            {feedbackData.additionalComments.length > 4 && (
+              <div className="text-center text-sm text-gray-500 mt-2">
+                + {feedbackData.additionalComments.length - 4} more comments
+              </div>
+            )}
+          </ul>
         </TitleCard>
       </div>
     </div>

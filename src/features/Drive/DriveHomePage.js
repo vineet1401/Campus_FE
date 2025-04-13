@@ -20,12 +20,12 @@ function DriveHomePage() {
       const response = await getAllDrives();
 
       if (response.status) {
-        dispatch(
-          showNotification({
-            message: `${response.message}`,
-            status: 1,
-          })
-        );
+        // dispatch(
+        //   showNotification({
+        //     message: `${response.message}`,
+        //     status: 1,
+        //   })
+        // );
 
         const allDrives = response.data;
         setDrive(allDrives);

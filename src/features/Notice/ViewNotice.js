@@ -23,12 +23,12 @@ function ViewNotice() {
     const response = await getAllNotifications();
 
     if (response.status) {
-      dispatch(
-        showNotification({
-          message: `${response.message}`,
-          status: 1,
-        })
-      );
+      // dispatch(
+      //   showNotification({
+      //     message: `${response.message}`,
+      //     status: 1,
+      //   })
+      // );
 
       const allNotice = response.data;
       setNotice(allNotice);
