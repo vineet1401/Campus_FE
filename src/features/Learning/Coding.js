@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 
 import { setPageTitle } from '../../redux/headerSlice';
-import { storeCodingProgress, getCodingProgress } from '../../services/codingProgress';
+import { storeCodingProgress, getCodingProgress } from '../../services/codingProgress.service';
 import { getAllCoding } from '../../services/coding.service';
 
 const DisplayData = () => {
@@ -35,7 +35,7 @@ const DisplayData = () => {
     getAllCoding()
       .then((res) => {
         const dbData = res.data.data; // ✅ FIXED
-        console.log("API data received:", dbData);
+        // console.log("API data received:", dbData);
 
         const grouped = {};
         dbData.forEach(item => {
