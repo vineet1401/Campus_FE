@@ -9,10 +9,10 @@ function InternalPage() {
   const dispatch = useDispatch();
   const { driveId } = useParams(); // this may be undefined
   const role =  getRoleFromToken(); // assuming auth state contains role and user info
-  const personalData = useSelector((state) => state.studentData.personal); // replace with your actual state slice
-  const educationData = useSelector((state) => state.studentData.education); // replace with your actual state slice
-  const projectData = useSelector((state) => state.studentData.project); // replace with your actual state slice
-  const experienceData = useSelector((state) => state.studentData.experience); // replace with your actual state slice
+  const personal = useSelector((state) => state.studentData.personal); // replace with your actual state slice
+  const education = useSelector((state) => state.studentData.education); // replace with your actual state slice
+  const projects = useSelector((state) => state.studentData.project); // replace with your actual state slice
+  const experience = useSelector((state) => state.studentData.experience); // replace with your actual state slice
 
   useEffect(() => {
     dispatch(setPageTitle({ title: "Profile Page" }));
@@ -24,7 +24,7 @@ function InternalPage() {
   }
 
   // Student or no driveId, use data from Redux
-  return <ProfilePage userData={{personalData, educationData, projectData, experienceData}} />;
+  return <ProfilePage userData={{personal, education, projects, experience}} />;
 }
 
 export default InternalPage;

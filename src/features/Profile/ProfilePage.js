@@ -5,7 +5,7 @@ import { showNotification } from "../../redux/headerSlice";
 
 const ProfilePage = ({ userId, userData }) => {
   const dispatch = useDispatch();
-  const [data, setData] = useState(userData || null);
+  const [data, setData] = useState();
 
   const fetchProfile = async (userId) => {
     try {
@@ -25,11 +25,13 @@ const ProfilePage = ({ userId, userData }) => {
   };
 
   useEffect(() => {
+
     if (userId) {
       // Admin mode: fetch user profile by userId
       fetchProfile(userId);
     } else if (userData) {
       // Directly use Redux data
+      console.log(userData);
       setData(userData);
     }
   }, [userId, userData]);
