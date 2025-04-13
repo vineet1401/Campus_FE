@@ -58,8 +58,8 @@ function ViewNotice() {
     fetchAndFilterNotice(); // Fetch and filter Notice when component mounts or when activeTab changes
   }, [activeTab]); // Re-run when activeTab changes
 
-  const handleDelete = async (id) => {
-    alert(`Deleting Notice of ${id}`);
+  const handleDelete = async (id, title) => {
+    alert(`Deleting Notice of ${title}`);
     const deleteResult = await deleteNotification(id);
     if (deleteResult.status) {
       dispatch(showNotification({ message: deleteResult.message, status: 1 }));
@@ -99,13 +99,13 @@ function ViewNotice() {
                   </p>
 
                   <p>
-                    <strong>Date:</strong> {not.notifyDate}
+                    <strong>Date:</strong> {new Date(not.notifyDate).toDateString()}
                   </p>
                 </div>
               </div>
               {role == "Admin" && (
                 <button
-                  onClick={() => handleDelete(not._id)}
+                  onClick={() => handleDelete(not._id, not.notifyTitle)}
                   className="btn bg-red-600 ml-4"
                 >
                   Delete

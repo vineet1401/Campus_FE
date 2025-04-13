@@ -22,6 +22,9 @@ const INITIAL_PERSONAL = {
     relationship: "",
     phoneNumber: "",
   },
+  zprn: "",
+  department: "",
+  year: "",
 };
 
 const studentDetailSlice = createSlice({

@@ -21,6 +21,42 @@ const GENDER = [
   },
 ];
 
+const PROGRAMS = [
+  {
+    name: "B.E.",
+    value: "BE",
+    streams: [
+      "Computer",
+      "Mechanical",
+      "AI & DS",
+      "Information Technology",
+      "Civil",
+    ],
+  },
+  {
+    name: "B.Tech.",
+    value: "BTech",
+    streams: [
+      "Computer",
+      "Mechanical",
+      "AI & DS",
+      "Information Technology",
+      "Civil",
+    ],
+  },
+  {
+    name: "M.B.A.",
+    value: "MBA",
+    streams: [
+      "Marketing",
+      "Finance",
+      "Human Resources",
+      "Operations",
+      "Entrepreneurship",
+    ],
+  },
+];
+
 const initialObj = {
   firstName: "",
   middleName: "",
@@ -43,10 +79,34 @@ const initialObj = {
     relationship: "",
     phoneNumber: "",
   },
+  zprn: "",
+  department: "",
+  year: "",
 };
 
 function PersonalPage() {
   const dispatch = useDispatch();
+
+  const [selectedProgram, setSelectedProgram] = useState("");
+  const [selectedStream, setSelectedStream] = useState("");
+  const [availableStreams, setAvailableStreams] = useState([]);
+
+  const handleProgramChange = ({ name, value }) => {
+    updateFormValue({ name, value });
+    setSelectedProgram(value);
+    const program = PROGRAMS.find((p) => p.value === value);
+    if (program) {
+      setAvailableStreams(program.streams);
+    } else {
+      setAvailableStreams([]);
+    }
+    setSelectedStream(""); // Reset stream when program changes
+  };
+
+  const handleStreamChange = ({ name, value }) => {
+    setSelectedStream(value);
+    updateFormValue({ name, value });
+  };
 
   const personalData = useSelector((state) => state.studentData.personal);
 
@@ -58,7 +118,7 @@ function PersonalPage() {
     if (response.status) {
       dispatch(showNotification({ message: response.message, status: 1 }));
       dispatch(setPersonalData(response.data));
-      setIsEditing(false)
+      setIsEditing(false);
     } else {
       dispatch(showNotification({ message: response.message, status: 0 }));
     }
@@ -154,6 +214,29 @@ function PersonalPage() {
             updateFormValue={updateFormValue}
             name="about"
             defaultValue={personal?.about}
+          />
+                          <SelectBox
+                    labelTitle="Program"
+                    options={PROGRAMS.map(p => ({ name: p.name, value: p.value }))}
+                    placeholder="Select Program"
+                    updateFormValue={handleProgramChange}
+                    name="year"
+                    defaultValue={personal?.year}
+                />
+                                <SelectBox
+                    labelTitle="Stream"
+                    options={availableStreams.map(stream => ({ name: stream, value: stream }))}
+                    placeholder="Select Stream"
+                    updateFormValue={updateFormValue}
+                    defaultValue={personal?.department}
+                    name="department"
+                />
+                          <InputText
+            updateFormValue={updateFormValue}
+            labelTitle={"ZPRN"}
+            readOnly={!isEditing}
+            name="zprn"
+            defaultValue={personal?.zprn}
           />
         </div>
 

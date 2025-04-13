@@ -136,7 +136,7 @@ const routes = [
         name: "Profile",
         submenu: [
           {
-            path: "/app/view-details",
+            path: "/app/view-profile-details",
             icon: <UserIcon className={submenuIconClasses} />,
             name: "View Detail",
           },
