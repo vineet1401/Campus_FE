@@ -9,6 +9,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@reduxjs/toolkit": "^1.9.0",
