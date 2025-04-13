@@ -24,14 +24,14 @@ const ViewFeedback = lazy(() => import("../pages/Feedback/ViewFeedback"));
 // Pages for Learning
 
 const DSA = lazy(() => import("../pages/Learning/Coding"));
-const apti = lazy(() => import("../pages/Learning/Aptitude"))
+const Apti = lazy(() => import("../pages/Learning/Aptitude"));
 
 // pages for resume
 
-const Resume = lazy(() => import("../pages/Resume Analyser/resume"))
-
+const Resume = lazy(() => import("../pages/Resume Analyser/resume"));
 
 // Pages for Profile
+const ProfilePage= lazy(() => import("../pages/Profile/ProfilePage"));
 const PersonalDetail = lazy(() => import("../pages/Profile/PersonalProfile"));
 const EducationDetail = lazy(() => import("../pages/Profile/EducationProfile"));
 const ExperienceDetail = lazy(() =>
@@ -76,6 +76,14 @@ const routes = [
     component: <Welcome />, // view rendered
   },
   {
+    path: "view-profile-details",
+    component: <ProfilePage />,
+  },
+  {
+    path: "view-profile-details/:driveId",
+    component: <ProfilePage />,
+  },
+  {
     path: "profile-personal",
     component: (
       <Student>
@@ -113,17 +121,16 @@ const routes = [
     component: <DriveDetails />,
   },
   {
-    path: "applied-student/:id",
+    path: "applied-student/:driveId",
     component: <StudentList />,
   },
   {
     path: "feedback",
-    component:
-      <FeedbackCards />,
+    component: <FeedbackCards />,
   },
   {
     path: "dsa",
-    component: <DSA />
+    component: <DSA />,
   },
   {
     path: "apti",
@@ -140,7 +147,7 @@ const routes = [
   //  {
   //   path:"/coding",
   //   component: <Coding />
-  //  } 
+  //  }
 ];
 
 export default routes;

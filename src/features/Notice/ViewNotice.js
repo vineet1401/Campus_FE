@@ -1,107 +1,116 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TitleCard from "../../components/Cards/TitleCard";
-
-// This data comes dynamically from BE-->
-const INITIAL_INTEGRATION_LIST = [
-  {
-    name: "Accenture",
-    icon: "https://cdn-icons-png.flaticon.com/512/5968/5968534.png",
-    description: "Gmail is a free email service provided by Google.",
-    ctc: "9 LPA",
-    location: "Hyderabad",
-    date: "2024-08-25",
-  },
-  {
-    name: "PTC",
-    icon: "https://cdn-icons-png.flaticon.com/512/2111/2111615.png",
-    description: "Slack is an instant messaging program.",
-    ctc: "10 LPA",
-    location: "Pune",
-    date: "2024-08-15",
-  },
-  {
-    name: "Facebook",
-    icon: "https://cdn-icons-png.flaticon.com/512/124/124010.png",
-    description: "Meta Platforms, Inc., doing business as Meta.",
-    ctc: "12 LPA",
-    location: "Mumbai",
-    date: "2024-08-20",
-  },
-  {
-    name: "Amazon",
-    icon: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
-    description:
-      "LinkedIn is a business and employment-focused social media platform.",
-    ctc: "15 LPA",
-    location: "Bangalore",
-    date: "2024-08-22",
-  },
-  {
-    name: "TCS",
-    icon: "https://cdn-icons-png.flaticon.com/512/2301/2301145.png",
-    description: "Google Ads is an online advertising platform.",
-    ctc: "8 LPA",
-    location: "Delhi",
-    date: "2024-08-18",
-  },
-  {
-    name: "Salesforce",
-    icon: "https://cdn-icons-png.flaticon.com/512/5968/5968880.png",
-    description: "It provides customer relationship management software.",
-    ctc: "14 LPA",
-    location: "Chennai",
-    date: "2024-08-28",
-  },
-  {
-    name: "Meta",
-    icon: "https://cdn-icons-png.flaticon.com/512/5968/5968872.png",
-    description: "American developer and marketer of software products.",
-    ctc: "16 LPA",
-    location: "Kolkata",
-    date: "2024-08-30",
-  },
-];
+import {
+  deleteNotification,
+  getAllNotifications,
+} from "../../services/notice.service";
+import FilterButtons from "../../components/Filter/FilterButtons";
+import { getRoleFromToken } from "../../app/rbacAuth";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../redux/headerSlice";
 
 function ViewNotice() {
-  const [integrationList] = useState(INITIAL_INTEGRATION_LIST);
+  const dispatch = useDispatch();
+  const role = getRoleFromToken();
 
-  const handleApply = (name) => {
-    alert(`Applying for ${name}`);
+  const tabList = ["Company Drive", "New Company Arrival"];
+
+  const [activeTab, setActiveTab] = useState("Company Drive");
+  const [notice, setNotice] = useState([]);
+  const [filteredNotice, setFilteredNotice] = useState([]);
+
+  const fetchAndFilterNotice = async () => {
+    const response = await getAllNotifications();
+
+    if (response.status) {
+      dispatch(
+        showNotification({
+          message: `${response.message}`,
+          status: 1,
+        })
+      );
+
+      const allNotice = response.data;
+      setNotice(allNotice);
+
+      console.log("notice", notice);
+
+      // Apply filtering logic immediately after fetching the data
+      const filtered = allNotice.filter((notice) => {
+        return notice.notifyType === activeTab;
+      });
+
+      console.log("fil", filtered);
+
+      setFilteredNotice(filtered); // Set the filtered Notice
+    } else {
+      dispatch(
+        showNotification({
+          message: `${response.message}`,
+          status: 0,
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    // Fetch Notice and filter them based on the active tab
+
+    fetchAndFilterNotice(); // Fetch and filter Notice when component mounts or when activeTab changes
+  }, [activeTab]); // Re-run when activeTab changes
+
+  const handleDelete = async (id, title) => {
+    alert(`Deleting Notice of ${title}`);
+    const deleteResult = await deleteNotification(id);
+    if (deleteResult.status) {
+      dispatch(showNotification({ message: deleteResult.message, status: 1 }));
+      // window.history.back();
+      setFilteredNotice((prev) =>
+        prev.filter((notice) => {
+          return notice.notifyType === activeTab && notice._id != id;
+        })
+      )
+    } else {
+      dispatch(showNotification({ message: deleteResult.message, status: 0 }));
+    }
   };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-        {integrationList.map((i, k) => (
-          <TitleCard key={k} title={i.name} topMargin={"mt-2"}>
+        <FilterButtons
+          setActiveTab={setActiveTab}
+          activeTab={activeTab}
+          tabList={tabList}
+        />
+        {filteredNotice.map((not) => (
+          <TitleCard key={not._id} title={not.notifyTitle} topMargin={"mt-2"}>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <img
+                {/* <img
                   alt="icon"
                   src={i.icon}
                   className="w-12 h-12 inline-block mr-4"
-                />
+                /> */}
                 <div>
-                  <p className="font-semibold">{i.name}</p>
-                  <p>{i.description}</p>
+                  <p className="font-semibold">{not.notifyTitle}</p>
+                  <p>{not.notifyDescription}</p>
                   <p>
-                    <strong>CTC:</strong> {i.ctc}
+                    <strong>Type:</strong> {not.notifyType}
                   </p>
+
                   <p>
-                    <strong>Location:</strong> {i.location}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {i.date}
+                    <strong>Date:</strong> {new Date(not.notifyDate).toDateString()}
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => handleApply(i.name)}
-                className="btn btn-success ml-4"
-              >
-                View
-              </button>
+              {role == "Admin" && (
+                <button
+                  onClick={() => handleDelete(not._id, not.notifyTitle)}
+                  className="btn bg-red-600 ml-4"
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </TitleCard>
         ))}

@@ -107,10 +107,10 @@ export const deleteDriveById = async (id) => {
 };
 
 // Apply to a placement drive
-export const applyToDrive = async (driveId, userId) => {
+export const applyToDrive = async (driveId, DriveId) => {
   try {
     const response = await axios.post(`/api/drive/apply/${driveId}`, {
-      userId,
+      DriveId,
     });
 
     return {
@@ -132,10 +132,10 @@ export const applyToDrive = async (driveId, userId) => {
 
 
 
-export const withdrawApplication = async (driveId, userId) => {
+export const withdrawApplication = async (driveId, DriveId) => {
   try {
     const response = await axios.post(`/api/drive/withdraw/${driveId}`, {
-      userId,
+      DriveId,
     });
 
     return {
@@ -150,6 +150,52 @@ export const withdrawApplication = async (driveId, userId) => {
       message: error.response
         ? error.response.data.message
         : "Failed to withdraw application",
+      data: null,
+    };
+  }
+};
+
+
+export const getStudentApplicationsByDriveId = async (driveId) => {
+  try {
+    const response = await axios.get(`/api/drive/student-applications/${driveId}`);
+
+    return {
+      status: response.data.status,
+      message: response.data.message,
+      data: response.data.data || [],
+    };
+  } catch (error) {
+    console.error(`❌ Failed to fetch applications for DriveId: ${driveId}`, error);
+
+    return {
+      status: error.response?.data?.status || false,
+      message: error.response?.data?.message || "Failed to fetch applications",
+      data: [],
+    };
+  }
+};
+
+
+export const updateApplicationStatus = async ({ driveId, userId, status }) => {
+  try {
+    console.log(driveId, userId, status)
+    const response = await axios.put(`/api/drive/update-status`, {
+      driveId,
+      userId,
+      status,
+    });
+
+    return {
+      status: response.data.status,
+      message: response.data.message,
+      data: response.data.data,
+    };
+  } catch (error) {
+    console.error("Error updating application status", error);
+    return {
+      status: false,
+      message: "Failed to update application status",
       data: null,
     };
   }
