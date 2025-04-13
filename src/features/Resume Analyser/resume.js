@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { uploadResume } from '../../services/resume.service'; // adjust path if needed
+import { useDispatch } from 'react-redux';
+import { setPageTitle } from '../../redux/headerSlice';
 
 const ResumeAnalyzer = () => {
     const [resumeFile, setResumeFile] = useState(null);
@@ -8,8 +10,14 @@ const ResumeAnalyzer = () => {
     const [responseData, setResponseData] = useState(null);
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
-    const API_KEY = process.env.API_KEY
+    // const API_KEY = process.env.API_KEY
+    // console.log("api key", API_KEY)
+
+    useEffect(() => {
+        dispatch(setPageTitle({ title: "Resume Analyzer" }));
+    }, [dispatch])
     const handleResumeUpload = (e) => {
         setResumeFile(e.target.files[0]);
     };
@@ -22,6 +30,7 @@ const ResumeAnalyzer = () => {
         if (!searchQuery) return;
         setLoading(true);
         try {
+            const API_KEY = "AIzaSyDQKYXX9JZQ8_eZEZir5BBpoEylmnzPOR8"
 
             const response = await fetch(
                 `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
@@ -96,10 +105,11 @@ const ResumeAnalyzer = () => {
                 {/* Server Response */}
                 {responseData && (
                     <div className="p-4 mt-4 border rounded-md bg-gray-100 shadow-sm">
-                        <h3 className="text-lg font-semibold mb-2">Missing Skills:</h3>
-                        <pre className="text-sm whitespace-pre-wrap">
+                        <h3 className="text-lg font-semibold mb-2">ATS Score : {responseData.ats_score} %</h3>
+                        <h3 className="text-lg font-semibold mb-2">Missing Skills : {responseData.missing_skills + " "}</h3>
+                        {/* <pre className="text-sm whitespace-pre-wrap">
                             {JSON.stringify(responseData.missing_skills, null, 2)}
-                        </pre>
+                        </pre> */}
                     </div>
                 )}
 

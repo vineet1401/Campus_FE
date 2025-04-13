@@ -3,7 +3,7 @@ import axios from "axios";
 export const storeCodingProgress = async (data) => {
     try {
         const response = await axios.post("/api/codingProgress/create", data)
-        console.log("✅ API response:", response.data);
+        // console.log("✅ API response:", response.data);
         return response;
     }
     catch (error) {
@@ -12,10 +12,11 @@ export const storeCodingProgress = async (data) => {
 }
 
 
-export const getCodingProgress = async (req, res) => {
+export const getCodingProgress = async () => {
     try {
         const response = await axios.get("/api/codingProgress/get")
-        return response.data
+        return { data: response.data, message: response.message };
+        // return response.data
     }
     catch (error) {
         console.log(error);
